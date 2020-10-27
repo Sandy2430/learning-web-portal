@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-search-item',
@@ -9,11 +10,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SearchItemComponent implements OnInit {
 
   searchForm: FormGroup;
+  bookList: any[] = [];
+  bookList1: any[] = [];
+  pageView = false;
+  bookDetailedView: any = [];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private appService: AppService
+    ) {}
 
   ngOnInit() {
     this.initSearchForm();
+    this.searchItem();
   }
 
   initSearchForm() {
@@ -21,5 +30,19 @@ export class SearchItemComponent implements OnInit {
       searchLibrary: '',
     });
   }
+searchItem() {
+  this.appService.getBookDetails()
+    .subscribe(
+      (result: any) => {
+        this.bookList = result;
+        console.log('result', this.bookList);
+      }
+    );
+}
+openpage(data){
+  this.pageView = true;
+  this.bookDetailedView = data;
+  console.log(data);
 
+}
 }

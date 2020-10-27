@@ -1,0 +1,25 @@
+.billing-container{
+    max-width: 580px;
+    max-height: 600px;
+    border: 1px solid lavender;
+    margin: 40px 0 40px 160px;
+}
+.billing-image-section{
+    background: white;
+}
+.billing-image{
+    height: 300px;
+    margin: 30px 10px 30px 10px;
+}
+.hint{
+    width: auto;
+    font-size: 10px;
+    font-weight: 100;
+    position: relative;
+    bottom: 25px;
+    right: 17px;
+}
+.submit{
+    width: auto;
+    text-align: end;
+}

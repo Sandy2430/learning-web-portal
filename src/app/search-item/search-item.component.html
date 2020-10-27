@@ -13,3 +13,69 @@
     >
   </div>
 </form>
+<div class="book-info">
+  <div
+    *ngFor="let books of bookList"
+    [ngClass]="{ item: !pageView }"
+    (click)="openpage(books)"
+  >
+    <div *ngIf="!pageView">
+      <div>
+        <div id="title" class="mat-title title">
+          {{ books?.volumeInfo?.title }}
+          <img src="../../assets/image/Angular.jpg" alt="" class="book-img" />
+        </div>
+      </div>
+      <div class="mat-caption subheading">
+        {{ books?.volumeInfo?.subtitle }}
+      </div>
+      <div>
+        <p>{{ books?.volumeInfo?.description }}</p>
+      </div>
+      <div class="author-detail">
+        <label class="mat-subheading-2">Written By:</label>
+        <div class="author-name">{{ books?.volumeInfo?.authors }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="pageView" [ngClass]="{ 'item-detailed-view': pageView }">
+  <div>
+    <div id="title" class="mat-title title">
+      {{ bookDetailedView?.volumeInfo?.title }}
+      <img src="../../assets/image/Angular.jpg" alt="" class="book-img" />
+    </div>
+  </div>
+  <div class="mat-caption subheading">
+    {{ bookDetailedView?.volumeInfo?.subtitle }}
+  </div>
+  <div class="book-classification">
+    <div>
+      <span class="mat-title">Rating : </span>
+      <span></span>
+    </div>
+    <div>
+      <span class="mat-title">Publisher : </span>
+      <span>{{ bookDetailedView?.volumeInfo?.publisher }}</span>
+    </div>
+    <div>
+      <span class="mat-title">Page Count : </span>
+      <span></span>
+    </div>
+    <div>
+      <span class="mat-title">Language : </span>
+      <span></span>
+    </div>
+  </div>
+  <div>
+    <p>{{ bookDetailedView?.volumeInfo?.description }}</p>
+  </div>
+  <div class="author-detail">
+    <label class="mat-subheading-2">Written By:</label>
+    <div class="author-name">{{ bookDetailedView?.volumeInfo?.authors }}</div>
+  </div>
+  <div class="footer-section">
+    <button mat-button color="accent" mat-raised-button>ADD TO CART</button>
+    <button mat-button color="accent" mat-raised-button [routerLink]="['/billing-details']">BUY</button>
+  </div>
+</div>

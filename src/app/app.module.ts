@@ -7,19 +7,29 @@ import { SearchItemComponent } from './search-item/search-item.component';
 import { OptionSectionComponent } from './option-section/option-section.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { AppRoutingModule } from './app-routing.module';
+import { CartComponent } from './cart/cart.component';
+import { MyCollectionComponent } from './my-collection/my-collection.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BillingDetailsPageComponent } from './billing-details-page/billing-details-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchItemComponent,
-    OptionSectionComponent
+    OptionSectionComponent,
+    CartComponent,
+    MyCollectionComponent,
+    BillingDetailsPageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
