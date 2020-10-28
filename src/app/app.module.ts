@@ -12,6 +12,7 @@ import { CartComponent } from './cart/cart.component';
 import { MyCollectionComponent } from './my-collection/my-collection.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BillingDetailsPageComponent } from './billing-details-page/billing-details-page.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BillingDetailsPageComponent } from './billing-details-page/billing-deta
     AngularMaterialModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

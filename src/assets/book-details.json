@@ -59,7 +59,7 @@
             "etag": "NsxMT6kCCVs",
             "selfLink": "https://www.googleapis.com/books/v1/volumes/RJxWIQOvoZUC",
             "volumeInfo": {
-                "title": "Ng-Book",
+                "title": "React",
                 "subtitle": "The Complete Guide to Angular",
                 "authors": [
                     "Gail Saunders-Smith"
@@ -75,7 +75,7 @@
             "etag": "NsxMT6kCCVs",
             "selfLink": "https://www.googleapis.com/books/v1/volumes/RJxWIQOvoZUC",
             "volumeInfo": {
-                "title": "Ng-Book",
+                "title": "Javascript",
                 "subtitle": "The Complete Guide to Angular",
                 "authors": [
                     "Gail Saunders-Smith"

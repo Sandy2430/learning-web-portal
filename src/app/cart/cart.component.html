@@ -1,1 +1,48 @@
-<p>cart works!</p>
+<div *ngFor="let items of cartListItem">
+  <div *ngIf="cartListItem" class="cart-data">
+    <div>
+      <div id="title" class="mat-title title">
+        {{ items?.title }}
+        <img src="../../assets/image/Angular.jpg" alt="" class="book-img" />
+      </div>
+    </div>
+    <div class="mat-caption subheading">
+      {{ items?.subtitle }}
+    </div>
+    <!-- <div class="book-classification">
+          <div>
+            <span class="mat-title">Rating : </span>
+            <span></span>
+          </div>
+          <div>
+            <span class="mat-title">Publisher : </span>
+            <span>{{ cartListItem?.volumeInfo?.publisher }}</span>
+          </div>
+          <div>
+            <span class="mat-title">Page Count : </span>
+            <span></span>
+          </div>
+          <div>
+            <span class="mat-title">Language : </span>
+            <span></span>
+          </div>
+        </div> -->
+    <div>
+      <p>{{ items?.description }}</p>
+    </div>
+    <div class="author-detail">
+      <div class="mat-subheading-2" style="text-align: start">Written By:</div>
+      <div class="author-name">{{ items?.authors }}</div>
+      <div>
+        <mat-icon class="remove-cart-img" (click)="removeItem()">remove_shopping_cart</mat-icon>
+      </div>
+    </div>
+    <!-- <div class="footer-section">
+          <button mat-button color="accent" mat-raised-button (click)="addToCart(bookDetailedView)">ADD TO CART</button>
+          <button mat-button color="accent" mat-raised-button [routerLink]="['/billing-details']">BUY</button>
+        </div> -->
+  </div>
+  <div class="footer-section">
+    <button mat-button color="accent" mat-raised-button (click)="checkLength()">Proceed to purchase</button>
+  </div>
+</div>

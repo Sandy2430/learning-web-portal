@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-option-section',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./option-section.component.scss']
 })
 export class OptionSectionComponent implements OnInit {
-
-  constructor() { }
+  cartLength: any;
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
+    this.appService.getUpdatedCartList().subscribe(data => {
+      if (data) {
+        this.cartLength = data.length;
+      } else {
+        this.cartLength = this.appService.getCartLength();
+      }
+    });
   }
 
 }

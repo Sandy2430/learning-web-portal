@@ -14,6 +14,9 @@ export class SearchItemComponent implements OnInit {
   bookList1: any[] = [];
   pageView = false;
   bookDetailedView: any = [];
+  bookInfo: any = [];
+  searchLibrary: string;
+  imgUrl = '../../assets/image/';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,7 +24,6 @@ export class SearchItemComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.initSearchForm();
     this.searchItem();
   }
 
@@ -35,14 +37,32 @@ searchItem() {
     .subscribe(
       (result: any) => {
         this.bookList = result;
-        console.log('result', this.bookList);
       }
     );
 }
-openpage(data){
+openpage(data) {
   this.pageView = true;
+  this.searchLibrary = '';
   this.bookDetailedView = data;
-  console.log(data);
-
+}
+addToCart(addToCart) {
+  this.bookInfo.push({
+    authors: addToCart.volumeInfo.authors,
+    description: addToCart.volumeInfo.description,
+    publishedDate: addToCart.volumeInfo.publishedDate,
+    publisher: addToCart.volumeInfo.publisher,
+    subtitle: addToCart.volumeInfo.subtitle,
+    title: addToCart.volumeInfo.title,
+  });
+  const sa = [{
+    authors: addToCart.volumeInfo.authors,
+    description: addToCart.volumeInfo.description,
+    publishedDate: addToCart.volumeInfo.publishedDate,
+    publisher: addToCart.volumeInfo.publisher,
+    subtitle: addToCart.volumeInfo.subtitle,
+    title: addToCart.volumeInfo.title,
+  }];
+  // console.log(this.bookInfo);
+  this.appService.updateCartList(this.bookInfo);
 }
 }
