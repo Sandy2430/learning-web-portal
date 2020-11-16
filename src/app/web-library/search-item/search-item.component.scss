@@ -1,0 +1,144 @@
+.example-form-field {
+  width: 200px;
+  height: 47px;
+  // margin: 18px 0 0 0;
+  background: white;
+  padding: 0 10px 0 16px;
+}
+.search-area {
+  margin: 20px;
+}
+.search-icon {
+  position: relative;
+  top: 8px;
+  left: 5px;
+  cursor: pointer;
+}
+.book-info {
+  display: flex;
+  // border: 1px solid black;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  // margin-bottom: 10px;
+}
+.item {
+  // order: 2;
+  width: 48%;
+  // border: 1px solid grey;
+  margin: 0 8px 8px 10px;
+}
+.item-detailed-view {
+  width: 55%;
+  border: 1px solid lavender;
+  margin: 42px 190px;
+  background: white;
+}
+.title {
+  width: auto;
+  position: relative;
+  text-align: start;
+  /* right: 134px; */
+  /* bottom: 14px; */
+  padding: 12px 12px 0 12px;
+  margin-bottom: 0;
+}
+.subheading {
+  text-align: start;
+  margin-left: 14px;
+}
+
+.book-img {
+  height: 75px;
+  width: 62px;
+}
+p {
+  font-size: 10px;
+  text-align: start;
+  margin: 24px 13px 13px 13px;
+}
+.author-label {
+  position: relative;
+  right: 165px;
+}
+.author-name {
+  position: relative;
+  bottom: 22px;
+  width: auto;
+  text-align: start;
+  // margin-left: 18px;
+  font-size: 10px;
+  margin-bottom: -14px;
+  font-weight: 100;
+}
+.author-detail {
+  width: auto;
+  text-align: start;
+  margin: 0 0 0 12px;
+}
+div {
+  #book-title {
+    width: 80%;
+    float: left;
+  }
+  #book-img {
+    //  width: 20%;
+    float: right;
+  }
+}
+.item:hover {
+  background: lavender;
+}
+.footer-section {
+  width: auto;
+  text-align: start;
+  margin: 10px 0 20px 10px;
+}
+button {
+  margin-right: 2rem;
+}
+.book-classification {
+  width: auto;
+  text-align: start;
+  margin: 10px 0 0 14px;
+  span {
+    font-size: 14px;
+    line-height: inherit;
+  }
+}
+.book-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.book{
+  width: 48%;
+  margin: 0 8px 8px 10px;
+  cursor: pointer;
+}
+.book-heading {
+  width: 80%;
+  height: auto;
+  text-align: start;
+}
+.book-img-area {
+  width: 20%;
+  height: auto;
+  text-align: end;
+  margin: 14px;
+}
+.author-info {
+  padding: 1px 18px;
+  text-align: start;
+}
+.author-name {
+  position: relative;
+  bottom: 22px;
+  width: auto;
+  text-align: start;
+  font-size: 10px;
+  margin-bottom: -14px;
+  font-weight: 100;
+}

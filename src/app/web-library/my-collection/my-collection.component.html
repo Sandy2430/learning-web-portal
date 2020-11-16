@@ -1,0 +1,43 @@
+<div *ngFor="let items of purchasedData">
+  <div *ngIf="purchasedData" class="cart-data">
+    <div>
+      <div id="title" class="mat-title title">
+        {{ items?.title }}
+        <!-- <img src="../../assets/image/Angular.jpg" alt="" class="book-img" /> -->
+        <img src="{{items?.imageLinks}}" alt="" class="book-img" />
+      </div>
+    </div>
+    <div class="mat-caption subheading">
+      {{ items?.subtitle }}
+    </div>
+    <div>
+      <p>{{ items?.description }}</p>
+    </div>
+    <div class="author-detail">
+      <div class="mat-subheading-2" style="text-align: start">Written By:</div>
+      <div class="author-name">{{ items?.authors }}</div>
+    </div>
+
+    <div class="title">
+      <span class="mat-title">Billing Address</span>
+    </div>
+    <div style="margin-bottom: 1rem;line-height: normal;">
+      <div class="title1">
+        <span class="mat-title" style="line-height: normal;">Name : </span>
+        <span>{{items?.userName}}</span>
+      </div>
+      <div class="title1">
+        <span class="mat-title" style="line-height: normal;">Email : </span>
+        <span>{{items?.userEmail}}</span>
+      </div>
+      <div class="title1">
+        <span class="mat-title" style="line-height: normal;">Phone : </span>
+        <span>{{items?.phoneNumber}}</span>
+      </div>
+      <div class="title1">
+        <span class="mat-title" style="line-height: normal;">Address : </span>
+        <span>{{items?.address}}</span>
+      </div>
+    </div>
+  </div>
+</div>

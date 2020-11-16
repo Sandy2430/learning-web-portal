@@ -1,0 +1,53 @@
+.container {
+  background: khaki;
+}
+.book-img {
+  height: 75px;
+  width: 62px;
+  margin: 0;
+}
+.book-heading {
+  width: 80%;
+  height: auto;
+  text-align: start;
+}
+.book-img-area {
+  width: 20%;
+  height: auto;
+  text-align: end;
+  margin: 14px;
+}
+#book-heading {
+  #book-title {
+    position: relative;
+    float: left;
+  }
+  #book-img {
+    position: relative;
+    float: right;
+  }
+}
+.author-info {
+  padding: 1px 18px;
+  text-align: start;
+}
+p {
+  text-align: start;
+}
+
+::ng-deep {
+  #book-details {
+    .mat-card-header-text {
+      margin: 0;
+    }
+  }
+}
+.author-name {
+    position: relative;
+    bottom: 22px;
+    width: auto;
+    text-align: start;
+    font-size: 10px;
+    margin-bottom: -14px;
+    font-weight: 100;
+  }

@@ -1,0 +1,30 @@
+<div>
+  <div>
+    <mat-icon style="margin-top: 4px">search</mat-icon>
+    <label [routerLink]="['/']">Search</label>
+  </div>
+  <div id="shopping_cart">
+    <mat-icon
+      style="margin-top: 4px"
+      [matBadge]="cartLength"
+      matBadgeColor="accent"
+      matBadgeOverlap="false"
+      matBadgePosition="above before"
+      [matBadgeHidden] = "cartLength === 0"
+      class="hide-text"
+      >shopping_cart</mat-icon
+    >
+    <label [routerLink]="['/cart']">Cart</label>
+  </div>
+  <div>
+    <mat-icon
+      style="margin-top: 4px"
+      [matBadge]="myCollectionLength"
+      matBadgeColor="accent"
+      matBadgeOverlap="false"
+      matBadgePosition="above before"
+      >library_books</mat-icon
+    >
+    <label [routerLink]="['/my-collection']">My Collection</label>
+  </div>
+</div>

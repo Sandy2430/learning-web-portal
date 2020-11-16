@@ -1,0 +1,158 @@
+<div *ngIf="!pageView" class="search-area">
+  <mat-form-field class="example-form-field">
+    <input
+      matInput
+      type="text"
+      placeholder="Search in Library"
+      [(ngModel)]="searchLibrary"
+      name="searchLibrary"
+    />
+  </mat-form-field>
+  <span style="height: 100%; width: 100%">
+    <mat-icon class="search-icon" (click)="searchItem()"
+      >search</mat-icon
+    ></span
+  >
+</div>
+<div class="book-container" *ngIf="!pageView">
+  <app-book-detail
+    class="book"
+    [bookDetails]="books?.volumeInfo"
+    *ngFor="let books of (bookList$ | async ) | filter: searchLibrary"
+    (click)="openpage(books)"
+  ></app-book-detail>
+</div>
+<div *ngIf="pageView" [ngClass]="{ 'item-detailed-view': pageView }">
+  <!-- New version -->
+  <mat-card id="book-details">
+    <mat-card-header>
+      <div class="book-heading">
+        <mat-card-title>{{ bookDetailedView?.title }}</mat-card-title>
+        <mat-card-subtitle>{{ bookDetailedView?.subtitlee }}</mat-card-subtitle>
+      </div>
+      <div class="book-img-area">
+        <img
+          class="book-img"
+          mat-card-image
+          src="{{ bookDetailedView?.imageLinks.smallThumbnail }}"
+          alt="Photo of a Shiba Inu"
+        />
+      </div>
+    </mat-card-header>
+    <div>
+      <div class="book-classification">
+        <div>
+          <span class="mat-title">Rating : </span>
+          <span>{{ bookDetailedView?.averageRating }}</span>
+        </div>
+        <div>
+          <span class="mat-title">Publisher : </span>
+          <span>{{ bookDetailedView?.publisher }}</span>
+        </div>
+        <div>
+          <span class="mat-title">Page Count : </span>
+          <span>{{ bookDetailedView?.pageCount }}</span>
+        </div>
+        <div>
+          <span class="mat-title">Language : </span>
+          <span>{{bookDetailedView?.language}}</span>
+        </div>
+      </div>
+      <mat-card-content>
+        <p>
+          {{ bookDetailedView?.description }}
+        </p>
+      </mat-card-content>
+    </div>
+    <mat-card-footer class="author-info">
+      <!-- <mat-card-title>Written By:</mat-card-title>
+    <mat-card-subtitle>{{bookDetails?.authors}}</mat-card-subtitle> -->
+      <label class="mat-subheading-2">Written By:</label>
+      <div class="author-name">{{ bookDetailedView?.authors }}</div>
+      
+    </mat-card-footer>
+    <div class="footer-section">
+      <!-- <button
+        mat-button
+        color="accent"
+        mat-raised-button
+        (click)="addToCart1()"
+      >
+        ADD TO CART
+      </button> -->
+      <button
+        mat-button
+        color="accent"
+        mat-raised-button
+        (click)="addToCart(bookDetailedView)"
+      >
+        ADD TO CART
+      </button>
+      <button
+        mat-button
+        color="accent"
+        mat-raised-button
+        (click)="purchaseDetail(bookDetailedView)"
+      >
+        BUY
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- old version -->
+  <!-- 
+  <div>
+    <div id="title" class="mat-title title">
+      {{ bookDetailedView?.title }}
+      <img src="../../assets/image/Angular.jpg" alt="" class="book-img" />
+    </div>
+  </div>
+  <div class="mat-caption subheading">
+    {{ bookDetailedView?.subtitle }}
+  </div>
+  <div class="book-classification">
+    <div>
+      <span class="mat-title">Rating : </span>
+      <span></span>
+    </div>
+    <div>
+      <span class="mat-title">Publisher : </span>
+      <span>{{ bookDetailedView?.publisher }}</span>
+    </div>
+    <div>
+      <span class="mat-title">Page Count : </span>
+      <span></span>
+    </div>
+    <div>
+      <span class="mat-title">Language : </span>
+      <span></span>
+    </div>
+  </div>
+  <div>
+    <p>{{ bookDetailedView?.description }}</p>
+  </div>
+  <div class="author-detail">
+    <label class="mat-subheading-2">Written By:</label>
+    <div class="author-name">{{ bookDetailedView?.authors }}</div>
+  </div>
+  <div class="footer-section">
+    <button
+      mat-button
+      color="accent"
+      mat-raised-button
+      (click)="addToCart(bookDetailedView)"
+    >
+      ADD TO CART
+    </button>
+    <button
+      mat-button
+      color="accent"
+      mat-raised-button
+      (click)="purchaseDetail(bookDetailedView)"
+    >
+      BUY
+    </button>
+  </div>
+</div>
+ -->
+</div>

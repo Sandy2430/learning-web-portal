@@ -3,37 +3,32 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SearchItemComponent } from './search-item/search-item.component';
-import { OptionSectionComponent } from './option-section/option-section.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { AppRoutingModule } from './app-routing.module';
-import { CartComponent } from './cart/cart.component';
-import { MyCollectionComponent } from './my-collection/my-collection.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BillingDetailsPageComponent } from './billing-details-page/billing-details-page.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './web-library/store';
+import { AppService } from './app.service';
+import { WebLibraryModule } from './web-library/web-library.module';
+import { MatIconModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchItemComponent,
-    OptionSectionComponent,
-    CartComponent,
-    MyCollectionComponent,
-    BillingDetailsPageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    AngularMaterialModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    Ng2SearchPipeModule
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot(),
+    WebLibraryModule,
+    MatIconModule,
+    RouterModule.forRoot([])
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit {
   title = 'learning-web-portal';
-  constructor(private appService: AppService) {}
+  constructor() {}
   ngOnInit() {
     
   }
