@@ -1,15 +1,16 @@
 <div *ngFor="let items of purchasedData">
   <div *ngIf="purchasedData" class="cart-data">
     <div>
-      <div id="title" class="mat-title title">
-        {{ items?.title }}
+      <div id="title" class="mat-title heading-section">
+        <span class="title">{{ items?.title }}</span>
+        <div class="mat-caption subheading">
+          {{ items?.subtitle }}
+        </div>
         <!-- <img src="../../assets/image/Angular.jpg" alt="" class="book-img" /> -->
         <img src="{{items?.imageLinks}}" alt="" class="book-img" />
       </div>
     </div>
-    <div class="mat-caption subheading">
-      {{ items?.subtitle }}
-    </div>
+    
     <div>
       <p>{{ items?.description }}</p>
     </div>
@@ -18,7 +19,7 @@
       <div class="author-name">{{ items?.authors }}</div>
     </div>
 
-    <div class="title">
+    <div class="billing-title">
       <span class="mat-title">Billing Address</span>
     </div>
     <div style="margin-bottom: 1rem;line-height: normal;">

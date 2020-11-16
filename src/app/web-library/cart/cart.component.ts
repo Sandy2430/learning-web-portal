@@ -15,6 +15,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.populateCartItem = JSON.parse(localStorage.getItem('cart-item'));
+    console.log('this.populateCartItem', this.populateCartItem);
     this.appService.updateCartLength(this.populateCartItem.length);
     }
   removeItem(bookArray, specificItem) {

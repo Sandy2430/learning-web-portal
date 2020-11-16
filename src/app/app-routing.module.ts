@@ -7,7 +7,7 @@ import { MyCollectionComponent } from './web-library/my-collection/my-collection
 import { SearchItemComponent } from './web-library/search-item/search-item.component';
 const routes: Routes = [
   {
-    path: '',
+    path: 'learning-web-portal',
     component: SearchItemComponent,
   },
   {

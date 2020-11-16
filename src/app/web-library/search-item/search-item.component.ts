@@ -46,7 +46,6 @@ export class SearchItemComponent implements OnInit {
       searchLibrary: '',
     });
   }
-  
   /* Search Click event */
   searchItem() {
     this.appService.updateSearchString(this.searchLibrary);

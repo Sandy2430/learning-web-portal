@@ -4,8 +4,9 @@
     background: white;
     margin: 20px 189px;
   }
-  .title {
+  .heading-section {
     width: auto;
+    height: 100px;
     position: relative;
     text-align: start;
     /* right: 134px; */
@@ -13,9 +14,14 @@
     padding: 12px 12px 0 12px;
     margin-bottom: 0;
   }
+  .title{
+    margin: 0 0 0 2px;
+  }
   .subheading {
+    width: 80%;
     text-align: start;
-    margin-left: 14px;
+    font-weight: 100;
+    // margin-left: 14px;
   }
   .book-img {
     height: 75px;
@@ -48,6 +54,8 @@
   div {
     img {
       float: right;
+      position: relative;
+      bottom: 50px;
     }
   }
   .remove-cart-img{
@@ -77,4 +85,8 @@
           font-size: 13px;
         //   line-height: normal;
       }
+  }
+  .billing-title{
+    text-align: start;
+    margin: 0 0 0 13px;
   }

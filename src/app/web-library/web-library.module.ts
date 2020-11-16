@@ -5,7 +5,6 @@ import { OptionSectionComponent } from './option-section/option-section.componen
 import { CartComponent } from './cart/cart.component';
 import { MyCollectionComponent } from './my-collection/my-collection.component';
 import { BillingDetailsPageComponent } from './billing-details-page/billing-details-page.component';
-import { BookDetailComponent } from './search-item/book-detail/book-detail.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -17,24 +16,24 @@ import { WebLibraryComponent } from './web-library.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from './store';
+import { BookDetailComponent } from './shared/book-detail/book-detail.component';
 const routes: Routes = [
-  {
-    path: '',
-    component: SearchItemComponent,
-  },
-  {
-    path: 'cart',
-    component: CartComponent,
-  },
-  {
-    path: 'my-collection',
-    component: MyCollectionComponent,
-  },
-  {
-    path: 'billing-details',
-    component: BillingDetailsPageComponent,
-  },
-];
+{
+  path: 'learning-web-portal',
+  component: SearchItemComponent
+},
+{
+  path: 'cart',
+  component: CartComponent,
+},
+{
+  path: 'my-collection',
+  component: MyCollectionComponent,
+},
+{
+  path: 'billing-details',
+  component: BillingDetailsPageComponent,
+}];
 @NgModule({
   declarations: [
     SearchItemComponent,
