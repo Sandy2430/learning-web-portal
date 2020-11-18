@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AppService } from '../../app.service';
+import { AppService } from '../app.service';
 import { BookList, VolumeInfo } from '../models/book-list.model';
 import { User } from '../models/user';
 
-import * as fromStore from '../store';
 
 @Component({
   selector: 'app-search-item',
@@ -19,9 +17,8 @@ export class SearchItemComponent implements OnInit {
   state$: Observable<object>;
   searchForm: FormGroup;
   bookList: BookList[];
-  bookList$: Observable<VolumeInfo[]>;
+  bookList$: Observable<BookList[]>;
   cartList$: Observable<VolumeInfo[]>;
-  bookList1: any[] = [];
   pageView = false;
   bookDetailedView: VolumeInfo;
   bookInfo: any = [];
@@ -34,8 +31,6 @@ export class SearchItemComponent implements OnInit {
     private formBuilder: FormBuilder,
     private appService: AppService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private store: Store<fromStore.ProductsState>
   ) {}
 
   ngOnInit() {
@@ -49,17 +44,15 @@ export class SearchItemComponent implements OnInit {
   /* Search Click event */
   searchItem() {
     this.appService.updateSearchString(this.searchLibrary);
-    this.bookList$ = this.store.select<any>(fromStore.getAllBooks);
-    this.store.dispatch(new fromStore.LoadBooksAction());
-  }
-  /* Manual trigger event for testing purpose*/
-  _searchItem() {
-    const searchItem = 'angular';
-    console.log(searchItem);
-    this.appService.getBooks().subscribe((result) => {
-      this.bookList = result;
-      console.log('this.bookList', this.bookList);
+    this.appService.getBooks()
+    .subscribe((books: any) => {
+      console.log('books', books);
+      this.bookList = books;
     });
+  }
+  sendBookArray(arr1, item){
+console.log('array', arr1);
+console.log('item', item);
   }
   openpage(data) {
     this.pageView = true;

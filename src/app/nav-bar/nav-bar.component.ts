@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../../app.service';
+
+import { AppService } from '../app.service';
 
 @Component({
-  selector: 'app-option-section',
-  templateUrl: './option-section.component.html',
-  styleUrls: ['./option-section.component.scss'],
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.scss'],
 })
-export class OptionSectionComponent implements OnInit {
-  cartLength: any;
-  myCollectionLength: any;
+export class NavBarComponent implements OnInit {
+  cartLength: number;
+  myCollectionLength: number;
   constructor(private appService: AppService) {}
 
   ngOnInit() {

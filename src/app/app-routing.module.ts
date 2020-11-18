@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BillingDetailsPageComponent } from './web-library/billing-details-page/billing-details-page.component';
-import { CartComponent } from './web-library/cart/cart.component';
-import { MyCollectionComponent } from './web-library/my-collection/my-collection.component';
-import { SearchItemComponent } from './web-library/search-item/search-item.component';
+import { BillingDetailsPageComponent } from './billing-details-page/billing-details-page.component';
+import { CartComponent } from './cart/cart.component';
+import { MyCollectionComponent } from './my-collection/my-collection.component';
+import { SearchItemComponent } from './search-item/search-item.component';
 const routes: Routes = [
   {
     path: 'learning-web-portal',

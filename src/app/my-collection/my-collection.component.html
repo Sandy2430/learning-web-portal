@@ -1,4 +1,4 @@
-<div *ngFor="let items of purchasedData">
+<!-- <div *ngFor="let items of purchasedData">
   <div *ngIf="purchasedData" class="cart-data">
     <div>
       <div id="title" class="mat-title heading-section">
@@ -6,7 +6,6 @@
         <div class="mat-caption subheading">
           {{ items?.subtitle }}
         </div>
-        <!-- <img src="../../assets/image/Angular.jpg" alt="" class="book-img" /> -->
         <img src="{{items?.imageLinks}}" alt="" class="book-img" />
       </div>
     </div>
@@ -41,4 +40,14 @@
       </div>
     </div>
   </div>
+</div> -->
+<div class="book">
+  <app-book-detail
+    [bookDetails]="items"
+    [cartComponent]="false"
+    [myCollection]="true"
+    [bookArray]="populateCartItem"
+    *ngFor="let items of purchasedData"
+  ></app-book-detail>
+  
 </div>

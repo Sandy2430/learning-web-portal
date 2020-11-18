@@ -1,0 +1,8 @@
+<div class="book">
+  <app-book-detail
+    [bookDetails]="items"
+    [cartComponent]="true"
+    [bookArray]="populateCartItem"
+    *ngFor="let items of populateCartItem"
+  ></app-book-detail>
+</div>

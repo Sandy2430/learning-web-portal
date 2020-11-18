@@ -31,6 +31,11 @@ export interface VolumeInfo {
     printType: string;
     ratingsCount: number;
     readingModes: ReadingModes;
+    userName?: string;
+    userEmail?: string;
+    phoneNumber?: string;
+    address?: string;
+
 }
 
 export interface ImageLinks {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../../app.service';
+
+import { AppService } from '../app.service';
+import { VolumeInfo } from '../models';
 
 @Component({
   selector: 'app-my-collection',
@@ -7,7 +9,7 @@ import { AppService } from '../../app.service';
   styleUrls: ['./my-collection.component.scss'],
 })
 export class MyCollectionComponent implements OnInit {
-  purchasedData: any;
+  purchasedData: VolumeInfo[];
   constructor(private appService: AppService) {}
 
   ngOnInit() {

@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { pluck, tap, map, toArray, concatAll, concatMap, mergeAll, filter } from 'rxjs/operators';
-import { BookList, VolumeInfo } from './web-library/models';
+import { BookList } from './models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  private baseUrl ='https://jsonplaceholder.typicode.com/';
-  private baseBookUrl ='https://www.googleapis.com/books/v1/volumes?q=';
+  private baseUrl = 'https://jsonplaceholder.typicode.com/';
+  private baseBookUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
   getSearchString = new BehaviorSubject(null);
   cartData = new BehaviorSubject(null);
   cartLength = new BehaviorSubject(null);
@@ -64,7 +64,7 @@ export class AppService {
       }
     );
   }
-  getMyCollectionLength() {
+  getMyCollectionLength(): any {
     this.myCollection.subscribe(res => {
       if (res) {
         return res.length;

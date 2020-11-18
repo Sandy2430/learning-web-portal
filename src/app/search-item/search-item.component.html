@@ -19,7 +19,8 @@
     class="book"
     [bookDetails]="books?.volumeInfo"
     [cartComponent]="false"
-    *ngFor="let books of (bookList$ | async ) | filter: searchLibrary"
+    [bookArray]="bookList"
+    *ngFor="let books of bookList | filter: searchLibrary"
     (click)="openpage(books)"
   ></app-book-detail>
 </div>

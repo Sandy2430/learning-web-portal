@@ -1,21 +1,24 @@
 .cart-data {
-    border: 1px solid lavender;
-    max-width: 500px;
     background: white;
     margin: 20px 189px;
   }
+  .book{
+    width: 65%;
+    margin: 15px 8px 8px 156px;
+    cursor: pointer;
+  }
   .title {
     width: auto;
+    height: 100px;
     position: relative;
     text-align: start;
-    /* right: 134px; */
-    /* bottom: 14px; */
-    padding: 12px 12px 0 12px;
+    padding: 12px 12px 12px 12px;
     margin-bottom: 0;
   }
   .subheading {
     text-align: start;
-    margin-left: 14px;
+    width: 80%;
+    font-weight: 100;
   }
   .book-img {
     height: 75px;
@@ -24,7 +27,7 @@
   p {
     font-size: 10px;
     text-align: start;
-    margin: 24px 13px 13px 13px;
+    margin: 0 13px 13px 13px;
   }
   .author-label {
     position: relative;
@@ -35,14 +38,12 @@
     bottom: 22px;
     width: auto;
     text-align: start;
-    // margin-left: 18px;
     font-size: 10px;
     margin-bottom: -14px;
     font-weight: 100;
   }
   .author-detail {
     width: auto;
-    // text-align: start;
     margin: 0 0 0 12px;
   }
   div {
@@ -53,7 +54,6 @@
   .remove-cart-img{
     width: auto;
     text-align: end;
-    /* margin-left: 360px; */
     position: relative;
     bottom: 2.5rem;
     color:  #e20074;
@@ -63,5 +63,5 @@
   }
   .footer-section{
     width: auto;
-    margin: 1px 0 16px -105px;
+    margin: 24px 0;
   }

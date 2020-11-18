@@ -83,10 +83,14 @@
   div{
       .mat-title{
           font-size: 13px;
-        //   line-height: normal;
       }
   }
   .billing-title{
     text-align: start;
     margin: 0 0 0 13px;
+  }
+  .book{
+    width: 65%;
+    margin: 15px 8px 8px 156px;
+    cursor: pointer;
   }

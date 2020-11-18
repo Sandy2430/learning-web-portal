@@ -7,9 +7,11 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'learning-web-portal';
+  
   constructor() {}
   ngOnInit() {
-    
+  }
+  addNumbers(num: number){
+    return num + num;
   }
 }

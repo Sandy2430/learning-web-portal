@@ -8,25 +8,37 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './web-library/store';
 import { AppService } from './app.service';
 import { MatIconModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { WebLibraryModule } from './web-library/web-library.module';
+import { SearchItemComponent } from './search-item/search-item.component';
+import { CartComponent } from './cart/cart.component';
+import { MyCollectionComponent } from './my-collection/my-collection.component';
+import { BillingDetailsPageComponent } from './billing-details-page/billing-details-page.component';
+import { BookDetailComponent } from './shared/book-detail/book-detail.component';
+import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SearchItemComponent,
+    NavBarComponent,
+    CartComponent,
+    MyCollectionComponent,
+    BillingDetailsPageComponent,
+    BookDetailComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot(),
+    AngularMaterialModule,
     MatIconModule,
-    RouterModule.forRoot([]),
-    WebLibraryModule
+    AppRoutingModule,
+    Ng2SearchPipeModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

@@ -1,0 +1,83 @@
+.container {
+  background: khaki;
+}
+.book-img {
+  height: 75px;
+  width: 62px;
+  margin: 0;
+}
+.book-heading {
+  width: 80%;
+  height: auto;
+  text-align: start;
+}
+.book-img-area {
+  width: 20%;
+  height: auto;
+  text-align: end;
+  margin: 14px 0 0 0;
+}
+#book-heading {
+  #book-title {
+    position: relative;
+    float: left;
+  }
+  #book-img {
+    position: relative;
+    float: right;
+  }
+}
+.author-info {
+  padding: 1px 18px;
+  text-align: start;
+}
+p {
+  text-align: start;
+  padding: 6px 0;
+}
+.title1{
+  width: auto;
+  text-align: start;
+  margin: 0 0 0 13px;
+  font-size: 13px;
+  line-height: normal;
+}
+
+.author-name {
+  position: relative;
+  bottom: 22px;
+  width: auto;
+  text-align: start;
+  font-size: 10px;
+  margin-bottom: -14px;
+  font-weight: 100;
+}
+
+.footer-section{
+  width: auto;
+  margin: 24px 0;
+  // text-align: center;
+}
+.billing-title{
+  text-align: start;
+  margin: 0 0 0 0;
+}
+
+::ng-deep{
+  #book-details {
+    .mat-card-header-text {
+      margin: 0;
+    }
+    // .mat-card-image{
+    //   margin: 0;
+    // }
+  }
+  #author-info{
+    #cartIcon{
+      float: right;
+      position: relative;
+      bottom: 1rem;
+      color: #e20074;
+    }
+  }
+}

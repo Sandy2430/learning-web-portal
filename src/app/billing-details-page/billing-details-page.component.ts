@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppService } from '../../app.service';
+
+import { AppService } from '../app.service';
+import { VolumeInfo } from '../models';
 
 @Component({
   selector: 'app-billing-details-page',
@@ -11,8 +13,8 @@ import { AppService } from '../../app.service';
 export class BillingDetailsPageComponent implements OnInit {
   billingForm: FormGroup;
   formValid = false;
-  purchasedBook: any;
-  purchaseDetail: any[] = [];
+  purchasedBook: VolumeInfo;
+  purchaseDetail: VolumeInfo[] = [];
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -21,7 +23,6 @@ export class BillingDetailsPageComponent implements OnInit {
 
   ngOnInit() {
     this.initBillingForm();
-    console.log('form',this.billingForm);
     this.activedRoute.queryParams.subscribe((res: any) => {
       this.purchasedBook = JSON.parse(res.data);
     });
@@ -41,17 +42,11 @@ const purchaseDetail = {
   userEmail: formData.userEmail,
   phoneNumber: formData.phoneNumber,
   address: formData.address,
-  title: this.purchasedBook.title,
-  subtitle: this.purchasedBook.subtitle,
-  publisher: this.purchasedBook.publisher,
-  publishedDate: this.purchasedBook.publishedDate,
-  description: this.purchasedBook.description,
-  authors: this.purchasedBook.authors,
-  imageLinks: this.purchasedBook.imageLinks.smallThumbnail
+  ...this.purchasedBook
 };
+
 this.purchaseDetail.push(purchaseDetail);
 this.appService.updateMyCollectionList(this.purchaseDetail);
 this.router.navigate(['/my-collection']);
-// console.log('purchaseDetail', purchaseDetail);
 }
 }
