@@ -1,3 +1,26 @@
+<ng-template #template>
+  <div class="modal-header">
+    <!-- <h4 class="modal-title pull-left">Conformation</h4> -->
+    <!-- <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">×</span>
+    </button> -->
+  </div>
+  <div class="modal-body">
+    <h3>Purchase is successful</h3>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">
+      Close
+    </button>
+  </div>
+</ng-template>
+
 <div class="col-md-12" style="width: auto; text-align: center">
   <div class="container billing-container row">
     <div class="col-md-6 billing-image-section">
@@ -9,30 +32,58 @@
         <div class="mat-title">Billing Info</div>
         <div>
           <mat-form-field class="example-form-field">
-            <input matInput type="text" placeholder="Your name" formControlName="userName"/>
+            <input
+              matInput
+              type="text"
+              placeholder="Your name"
+              formControlName="userName"
+            />
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="example-form-field">
-            <input matInput type="text" placeholder="Your email"  formControlName="userEmail"/>
+            <input
+              matInput
+              type="text"
+              placeholder="Your email"
+              formControlName="userEmail"
+            />
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="example-form-field">
-            <input matInput type="text" placeholder="Your phone number"  formControlName="phoneNumber"/>
+            <input
+              matInput
+              type="text"
+              placeholder="Your phone number"
+              formControlName="phoneNumber"
+            />
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="example-form-field">
             <!-- <input matInput type="text" placeholder="Your address"  formControlName="address"/> -->
-            <textarea matInput rows="3" cols="4" placeholder="Your address"  formControlName="address"></textarea>
+            <textarea
+              matInput
+              rows="3"
+              cols="4"
+              placeholder="Your address"
+              formControlName="address"
+            ></textarea>
           </mat-form-field>
         </div>
         <div>
           <span class="hint">Please enter your correct address</span>
         </div>
         <div class="submit">
-          <button color="accent" mat-raised-button [disabled]="billingForm.status==='INVALID'" (click)="billingDetails(billingForm.value)">Submit</button>
+          <button
+            color="accent"
+            mat-raised-button
+            [disabled]="billingForm.status === 'INVALID'"
+            (click)="billingDetails(template, billingForm.value)"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>

@@ -1,76 +1,132 @@
 <mat-card id="book-details">
-    <mat-card-header>
-      <div class="book-heading">
-        <mat-card-title>{{ bookDetails?.title }}</mat-card-title>
-        <mat-card-subtitle>{{ bookDetails?.subtitle }}</mat-card-subtitle>
-      </div>
-      <div class="book-img-area" *ngIf="bookDetails?.imageLinks">
-        <img
-          class="book-img"
-          mat-card-image
-          src="{{ bookDetails?.imageLinks.smallThumbnail }}"
-          alt="Photo of a Shiba Inu"
-        />
-      </div>
-    </mat-card-header>
-    <div>
-      <mat-card-content>
-        <p>
-          {{
-            bookDetails?.description
-              ? (bookDetails?.description | slice: 0:300) + "..."
-              : "No Book information"
-          }}
-        </p>
-      </mat-card-content>
+  <mat-card-header>
+    <div class="book-heading">
+      <mat-card-title>{{ bookDetails?.title }}</mat-card-title>
+      <mat-card-subtitle>{{ bookDetails?.subtitle }}</mat-card-subtitle>
     </div>
-    <mat-card-footer class="author-info" id="author-info">
-      <label class="mat-subheading-2">Written By:</label>
-      <div class="author-name">
-        {{ bookDetails?.authors }}
-        <mat-icon *ngIf="cartComponent" class="remove-cart-img" id="cartIcon" (click)="removeItem(bookArray,bookDetails)"
-        >remove_shopping_cart</mat-icon
-      >
-      </div>
-      <!-- <div *ngIf="cartComponent" id="cartIcon">
-        <mat-icon class="remove-cart-img" (click)="removeItem(bookArray,bookDetails)"
-          >remove_shopping_cart</mat-icon
-        >
-      </div> -->
-      <div *ngIf="myCollection">
-        <div class="billing-title">
-          <span class="mat-title">Billing Address</span>
+    <div class="book-img-area" *ngIf="bookDetails?.imageLinks">
+      <img
+        class="book-img"
+        mat-card-image
+        src="{{ bookDetails?.imageLinks.smallThumbnail }}"
+        alt="Photo of a Shiba Inu"
+      />
+    </div>
+  </mat-card-header>
+  <div>
+    <div *ngIf="completeBookView">
+      <div class="book-classification">
+        <div>
+          <span class="mat-title">Rating : </span>
+          <span>{{ bookDetails?.averageRating }}</span>
         </div>
-        <div style="margin-bottom: 1rem;line-height: normal;">
-          <div class="title1">
-            <span class="mat-title" style="line-height: normal;font-size: initial;">Name : </span>
-            <span>{{bookDetails?.userName}}</span>
-          </div>
-          <div class="title1">
-            <span class="mat-title" style="line-height: normal;font-size: initial;">Email : </span>
-            <span>{{bookDetails?.userEmail}}</span>
-          </div>
-          <div class="title1">
-            <span class="mat-title" style="line-height: normal;font-size: initial;">Phone : </span>
-            <span>{{bookDetails?.phoneNumber}}</span>
-          </div>
-          <div class="title1">
-            <span class="mat-title" style="line-height: normal;font-size: initial;">Address : </span>
-            <span>{{bookDetails?.address}}</span>
-          </div>
+        <div>
+          <span class="mat-title">Publisher : </span>
+          <span>{{ bookDetails?.publisher }}</span>
+        </div>
+        <div>
+          <span class="mat-title">Page Count : </span>
+          <span>{{ bookDetails?.pageCount }}</span>
+        </div>
+        <div>
+          <span class="mat-title">Language : </span>
+          <span>{{ bookDetails?.language }}</span>
         </div>
       </div>
-      
-    </mat-card-footer>
-    
-  </mat-card>
-  <div *ngIf="cartComponent" class="footer-section col-md-12">
+    </div>
+    <mat-card-content>
+      <p>
+        {{
+          completeBookView
+            ? bookDetails?.description
+            : myCollection
+            ? bookDetails?.description
+            : !bookDetails?.description
+            ? "No description content"
+            : (bookDetails?.description | slice: 0:300) + "..."
+        }}
+      </p>
+    </mat-card-content>
+  </div>
+  <div *ngIf="completeBookView" class="footer-section">
     <button
       mat-button
       color="accent"
       mat-raised-button
-      (click)="billingInfoPage(bookDetails)"
+      (click)="addToCart(bookDetails)"
     >
-      Proceed to purchase
+      ADD TO CART
+    </button>
+    <button
+      mat-button
+      color="accent"
+      mat-raised-button
+      [routerLink]="['/billing-details']"
+      [queryParams]="{ data: JSON.stringify(bookDetails) }"
+    >
+      BUY
     </button>
   </div>
+  <mat-card-footer class="author-info" id="author-info">
+    <label class="mat-subheading-2">Written By:</label>
+    <div class="author-name">
+      {{ bookDetails?.authors }}
+      <mat-icon
+        *ngIf="cartComponent"
+        class="remove-cart-img"
+        id="cartIcon"
+        (click)="removeItem(bookArray, bookDetails)"
+        >remove_shopping_cart</mat-icon
+      >
+    </div>
+    <div *ngIf="myCollection">
+      <div class="billing-title">
+        <span class="mat-title">Billing Address</span>
+      </div>
+      <div style="margin-bottom: 1rem; line-height: normal">
+        <div class="title1">
+          <span
+            class="mat-title"
+            style="line-height: normal; font-size: initial"
+            >Name :
+          </span>
+          <span>{{ bookDetails?.userName }}</span>
+        </div>
+        <div class="title1">
+          <span
+            class="mat-title"
+            style="line-height: normal; font-size: initial"
+            >Email :
+          </span>
+          <span>{{ bookDetails?.userEmail }}</span>
+        </div>
+        <div class="title1">
+          <span
+            class="mat-title"
+            style="line-height: normal; font-size: initial"
+            >Phone :
+          </span>
+          <span>{{ bookDetails?.phoneNumber }}</span>
+        </div>
+        <div class="title1">
+          <span
+            class="mat-title"
+            style="line-height: normal; font-size: initial"
+            >Address :
+          </span>
+          <span>{{ bookDetails?.address }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card-footer>
+</mat-card>
+<div *ngIf="cartComponent" class="footer-section col-md-12">
+  <button
+    mat-button
+    color="accent"
+    mat-raised-button
+    (click)="billingInfoPage(bookDetails)"
+  >
+    Proceed to purchase
+  </button>
+</div>

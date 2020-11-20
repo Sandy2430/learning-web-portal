@@ -17,7 +17,7 @@ export class BooksEffects {
   .pipe(
       ofType<bookActions.LoadBooksAction>(bookActions.bookListActions.LOAD_BOOKS),
       switchMap(() => {
-    return this.appService.getBooks().pipe(
+    return this.appService.getBooks('baby').pipe(
         map((books: any) => new bookActions.LoadBooksSuccessAction(books)),
         catchError(error => of(new bookActions.LoadBooksFailAction(error)))
     );

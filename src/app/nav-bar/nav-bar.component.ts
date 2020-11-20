@@ -14,7 +14,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
     this.appService.getUpdatedCartLength().subscribe((res) => {
-        this.cartLength = res;
+      this.cartLength = res;
     });
     this.appService.getUpdatedMyCollectionList().subscribe((data) => {
       if (data) {

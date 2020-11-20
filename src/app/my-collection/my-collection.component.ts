@@ -9,7 +9,7 @@ import { VolumeInfo } from '../models';
   styleUrls: ['./my-collection.component.scss'],
 })
 export class MyCollectionComponent implements OnInit {
-  purchasedData: VolumeInfo[];
+  purchasedData: VolumeInfo;
   constructor(private appService: AppService) {}
 
   ngOnInit() {
@@ -18,7 +18,6 @@ export class MyCollectionComponent implements OnInit {
   getPurchaseDetail() {
     this.appService.getUpdatedMyCollectionList().subscribe((purchaseData) => {
       this.purchasedData = purchaseData;
-      console.log('this.purchasedData', this.purchasedData);
     });
   }
 }

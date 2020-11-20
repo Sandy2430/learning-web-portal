@@ -7,11 +7,10 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  
   constructor() {}
   ngOnInit() {
   }
-  addNumbers(num: number){
+  addNumbers(num: number) {
     return num + num;
   }
 }

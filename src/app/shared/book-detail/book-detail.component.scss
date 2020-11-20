@@ -62,7 +62,25 @@ p {
   text-align: start;
   margin: 0 0 0 0;
 }
-
+.footer-section {
+  width: auto;
+  text-align: start;
+  margin: 10px 0 20px 10px;
+}
+button {
+  margin-right: 2rem;
+}
+.book-classification {
+  position: relative;
+    // bottom: 22px;
+    width: auto;
+    text-align: start;
+    margin: 12px 0 0 0;
+  span {
+    font-size: 14px;
+    line-height: inherit;
+  }
+}
 ::ng-deep{
   #book-details {
     .mat-card-header-text {

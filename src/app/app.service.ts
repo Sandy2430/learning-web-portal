@@ -1,54 +1,41 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { pluck, tap, map, toArray, concatAll, concatMap, mergeAll, filter } from 'rxjs/operators';
+import { pluck, tap, map } from 'rxjs/operators';
+
 import { BookList } from './models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  private baseUrl = 'https://jsonplaceholder.typicode.com/';
   private baseBookUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
-  getSearchString = new BehaviorSubject(null);
   cartData = new BehaviorSubject(null);
   cartLength = new BehaviorSubject(null);
   myCollection = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) { }
 
-  getBookDetails() {
-    return this.http.get('../assets/book-details.json')
-    .pipe(
-      pluck('items'),
-      map((data: any) => (data)),
-    );
-  }
-  updateSearchString(searchItem: string) {
-    this.getSearchString.next(searchItem);
-  }
-  getUpdatedSearchString() {
-    return this.getSearchString.asObservable();
-  }
-  updateCartList(item) {
+ 
+  updateCartList(item): void {
     this.cartData.next(item);
   }
-  updateCartLength(item) {
+  updateCartLength(item): void {
     this.cartLength.next(item);
   }
-  getUpdatedCartList() {
+  getUpdatedCartList(): Observable<any> {
     return this.cartData.asObservable();
   }
-  getUpdatedCartLength() {
+  getUpdatedCartLength(): Observable<any> {
     return this.cartLength.asObservable();
   }
-  updateMyCollectionList(item) {
+  updateMyCollectionList(item): void {
     this.myCollection.next(item);
   }
-  getUpdatedMyCollectionList() {
+  getUpdatedMyCollectionList(): Observable<any> {
     return this.myCollection.asObservable();
   }
-  getCartLength() {
+  getCartLength(): any {
     this.cartData.subscribe(res => {
       if (res) {
         return res.length;
@@ -73,22 +60,11 @@ export class AppService {
       }
     });
   }
-  getUser(uri: string, params?: any) {
-    const data = { params };
-    return this.http.get(this.baseUrl + uri, data);
-  }
-  getBooks(): Observable<BookList[]> {
-    let searchdata = '';
-    this.getUpdatedSearchString().subscribe(
-      searchString => {
-        searchdata = searchString;
-      }
-    );
-    return this.http.get<BookList[]>(`${this.baseBookUrl}${searchdata}`)
-    .pipe(
-        pluck('items'),
-       tap(console.log),
-        map((books: any) => books)
-    );
+  getBooks(searchdata): Observable<BookList[]> {
+      return this.http.get<BookList[]>(`${this.baseBookUrl}${searchdata}`)
+      .pipe(
+          pluck('items'),
+          map((books: BookList[]) => books)
+      );
 }
 }

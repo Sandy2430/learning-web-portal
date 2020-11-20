@@ -6,7 +6,7 @@ export interface BookList {
     saleInfo: SaleInfo;
     searchInfo: SearchInfo;
     selfLink: string;
-    volumeInfo: VolumeInfo[];
+    volumeInfo: VolumeInfo;
 }
 export interface VolumeInfo {
     allowAnonLogging: boolean;

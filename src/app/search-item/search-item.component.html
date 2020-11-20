@@ -1,4 +1,4 @@
-<div *ngIf="!pageView" class="search-area">
+<div class="search-area">
   <mat-form-field class="example-form-field">
     <input
       matInput
@@ -9,84 +9,19 @@
     />
   </mat-form-field>
   <span style="height: 100%; width: 100%">
-    <mat-icon class="search-icon" (click)="searchItem()"
+    <mat-icon class="search-icon" (click)="searchItem(searchLibrary)"
       >search</mat-icon
     ></span
   >
 </div>
-<div class="book-container" *ngIf="!pageView">
+<div class="book-container">
   <app-book-detail
     class="book"
     [bookDetails]="books?.volumeInfo"
     [cartComponent]="false"
     [bookArray]="bookList"
     *ngFor="let books of bookList | filter: searchLibrary"
-    (click)="openpage(books)"
+    [routerLink]="['/full-book-view']"
+    [queryParams]="{ data: JSON.stringify(books.volumeInfo) }"
   ></app-book-detail>
-</div>
-<div *ngIf="pageView" [ngClass]="{ 'item-detailed-view': pageView }">
-  <mat-card id="book-details">
-    <mat-card-header>
-      <div class="book-heading">
-        <mat-card-title>{{ bookDetailedView?.title }}</mat-card-title>
-        <mat-card-subtitle>{{ bookDetailedView?.subtitlee }}</mat-card-subtitle>
-      </div>
-      <div class="book-img-area">
-        <img
-          class="book-img"
-          mat-card-image
-          src="{{ bookDetailedView?.imageLinks.smallThumbnail }}"
-          alt="Photo of a Shiba Inu"
-        />
-      </div>
-    </mat-card-header>
-    <div>
-      <div class="book-classification">
-        <div>
-          <span class="mat-title">Rating : </span>
-          <span>{{ bookDetailedView?.averageRating }}</span>
-        </div>
-        <div>
-          <span class="mat-title">Publisher : </span>
-          <span>{{ bookDetailedView?.publisher }}</span>
-        </div>
-        <div>
-          <span class="mat-title">Page Count : </span>
-          <span>{{ bookDetailedView?.pageCount }}</span>
-        </div>
-        <div>
-          <span class="mat-title">Language : </span>
-          <span>{{bookDetailedView?.language}}</span>
-        </div>
-      </div>
-      <mat-card-content>
-        <p>
-          {{ bookDetailedView?.description }}
-        </p>
-      </mat-card-content>
-    </div>
-    <mat-card-footer class="author-info">
-      <label class="mat-subheading-2">Written By:</label>
-      <div class="author-name">{{ bookDetailedView?.authors }}</div>
-      
-    </mat-card-footer>
-    <div class="footer-section">
-      <button
-        mat-button
-        color="accent"
-        mat-raised-button
-        (click)="addToCart(bookDetailedView)"
-      >
-        ADD TO CART
-      </button>
-      <button
-        mat-button
-        color="accent"
-        mat-raised-button
-        (click)="purchaseDetail(bookDetailedView)"
-      >
-        BUY
-      </button>
-    </div>
-  </mat-card>
 </div>
