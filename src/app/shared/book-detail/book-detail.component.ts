@@ -15,7 +15,8 @@ export class BookDetailComponent implements OnInit {
   @Input() cartComponent: boolean;
   @Input() myCollection: boolean;
   @Input() bookArray: BookList[];
-  JSON;
+  JSON; // @JSON has been defined to overcome JSON.Stringfy undefined error,
+  // which declared in template file.
   bookInfo: VolumeInfo[] = [];
   bookItem: VolumeInfo[] = [];
   constructor(private appService: AppService, private router: Router) {

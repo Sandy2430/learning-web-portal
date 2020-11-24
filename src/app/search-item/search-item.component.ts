@@ -9,7 +9,8 @@ import { BookList, VolumeInfo } from "../models/book-list.model";
   styleUrls: ["./search-item.component.scss"],
 })
 export class SearchItemComponent implements OnInit {
-  JSON;
+  JSON; // @JSON has been defined to overcome JSON.Stringfy undefined error,
+        // which declared in template file.
   bookList: BookList[];
   bookDetailedView: VolumeInfo;
   searchLibrary: string;

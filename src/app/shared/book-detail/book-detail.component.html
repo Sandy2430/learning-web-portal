@@ -70,7 +70,7 @@
   <mat-card-footer class="author-info" id="author-info">
     <label class="mat-subheading-2">Written By:</label>
     <div class="author-name">
-      {{ bookDetails?.authors }}
+      {{ bookDetails?.authors ? bookDetails?.authors : 'No Author information'}}
       <mat-icon
         *ngIf="cartComponent"
         class="remove-cart-img"

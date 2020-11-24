@@ -12,7 +12,6 @@ import { VolumeInfo } from "../models";
   styleUrls: ["./billing-details-page.component.scss"],
 })
 export class BillingDetailsPageComponent implements OnInit {
-  JSON;
   modalRef: BsModalRef;
   billingForm: FormGroup;
   formValid = false;
@@ -23,7 +22,6 @@ export class BillingDetailsPageComponent implements OnInit {
     private appService: AppService,
     private modalService: BsModalService
   ) {
-    this.JSON = JSON;
   }
 
   ngOnInit() {
