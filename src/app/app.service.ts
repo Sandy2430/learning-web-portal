@@ -1,22 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { pluck, tap, map } from 'rxjs/operators';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { pluck, map } from "rxjs/operators";
 
-import { BookList } from './models';
+import { BookList } from "./models";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AppService {
-  private baseBookUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
+  private baseBookUrl = "https://www.googleapis.com/books/v1/volumes?q=";
   cartData = new BehaviorSubject(null);
   cartLength = new BehaviorSubject(null);
   myCollection = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
- 
   updateCartList(item): void {
     this.cartData.next(item);
   }
@@ -35,8 +34,8 @@ export class AppService {
   getUpdatedMyCollectionList(): Observable<any> {
     return this.myCollection.asObservable();
   }
-  getCartLength(): any {
-    this.cartData.subscribe(res => {
+  getCartLength() {
+    this.cartData.subscribe((res) => {
       if (res) {
         return res.length;
       } else {
@@ -44,15 +43,13 @@ export class AppService {
       }
     });
   }
-  getCartItem(): any {
-    this.getUpdatedCartList().subscribe(
-      res => {
-        return res;
-      }
-    );
+  getCartItem() {
+    this.getUpdatedCartList().subscribe((res) => {
+      return res;
+    });
   }
   getMyCollectionLength(): any {
-    this.myCollection.subscribe(res => {
+    this.myCollection.subscribe((res) => {
       if (res) {
         return res.length;
       } else {
@@ -61,10 +58,9 @@ export class AppService {
     });
   }
   getBooks(searchdata): Observable<BookList[]> {
-      return this.http.get<BookList[]>(`${this.baseBookUrl}${searchdata}`)
-      .pipe(
-          pluck('items'),
-          map((books: BookList[]) => books)
-      );
-}
+    return this.http.get<BookList[]>(`${this.baseBookUrl}${searchdata}`).pipe(
+      pluck("items"),
+      map((books: BookList[]) => books)
+    );
+  }
 }

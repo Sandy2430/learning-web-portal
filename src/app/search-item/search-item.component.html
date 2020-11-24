@@ -22,6 +22,6 @@
     [bookArray]="bookList"
     *ngFor="let books of bookList | filter: searchLibrary"
     [routerLink]="['/full-book-view']"
-    [queryParams]="{ data: JSON.stringify(books.volumeInfo) }"
+    [queryParams]="{data: JSON.stringify(books.volumeInfo)}"
   ></app-book-detail>
 </div>

@@ -7,6 +7,7 @@ export interface BookList {
     searchInfo: SearchInfo;
     selfLink: string;
     volumeInfo: VolumeInfo;
+    data?: VolumeInfo;
 }
 export interface VolumeInfo {
     allowAnonLogging: boolean;

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { AppService } from '../app.service';
-import { BookList, VolumeInfo } from '../models/book-list.model';
+import { AppService } from "../app.service";
+import { BookList, VolumeInfo } from "../models/book-list.model";
 
 @Component({
-  selector: 'app-search-item',
-  templateUrl: './search-item.component.html',
-  styleUrls: ['./search-item.component.scss'],
+  selector: "app-search-item",
+  templateUrl: "./search-item.component.html",
+  styleUrls: ["./search-item.component.scss"],
 })
 export class SearchItemComponent implements OnInit {
   JSON;
@@ -23,11 +23,11 @@ export class SearchItemComponent implements OnInit {
   /* Search Click event */
   searchItem(searchItem) {
     if (searchItem) {
-      this.appService.getBooks(searchItem).subscribe((books: any) => {
+      this.appService.getBooks(searchItem).subscribe((books: BookList[]) => {
         this.bookList = books;
       });
     } else {
-      alert('Please Enter search item in search box');
+      alert("Please Enter search item in search box");
     }
   }
 }

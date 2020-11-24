@@ -4,7 +4,7 @@ const { compilerOptions } = require('./tsconfig');
 module.exports = {
   preset: 'jest-preset-angular',
   roots: ['<rootDir>/src/'],
-  testMatch: ['**/+(search-item.component.)+(spec).+(ts)'],
+  testMatch: ['**/+(*.)+(spec).+(ts)'],
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   transformIgnorePatterns:[
       "node_modules/(?!@ngrx|ngx-socket-io)" // List any packages here that error

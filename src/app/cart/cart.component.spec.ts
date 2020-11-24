@@ -1,25 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CartComponent } from "./cart.component";
 
-import { CartComponent } from './cart.component';
-
-describe('CartComponent', () => {
-  let component: CartComponent;
-  let fixture: ComponentFixture<CartComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CartComponent ]
-    })
-    .compileComponents();
-  }));
+describe("CartComponent", () => {
+  let fixture: CartComponent;
+  let mockAppService: any;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    mockAppService = {
+      updateCartLength: jest.fn(),
+    };
+    fixture = new CartComponent(mockAppService);
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe("Test: CartComponent", () => {
+    it("Cart component to be initialized", () => {
+      expect(fixture).toBeTruthy();
+    });
+    it("Update cart length", () => {
+      const mockCartLen = 1;
+      const spyUpdateCartLen = jest
+        .spyOn(mockAppService, "updateCartLength")
+        .mockReturnValue(mockCartLen);
+      expect(mockAppService.updateCartLength(mockCartLen)).toBe(mockCartLen);
+      expect(spyUpdateCartLen).toHaveBeenCalledWith(mockCartLen);
+    });
   });
 });
