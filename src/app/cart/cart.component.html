@@ -1,8 +1,12 @@
-<div class="book">
+<div class="book" *ngIf="cartCount !== 0">
   <app-book-detail
     [bookDetails]="items"
     [cartComponent]="true"
-    [bookArray]="populateCartItem"
-    *ngFor="let items of populateCartItem"
+    [bookArray]=" populateCartItem$ | async"
+    *ngFor="let items of populateCartItem$ | async"
   ></app-book-detail>
+</div>
+<div class="book" style="position: absolute; text-align: center;" *ngIf="(cartCount === null || (cartCount === 0))">
+  <label class="empty">Cart Empty</label> 
+ 
 </div>

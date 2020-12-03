@@ -6,11 +6,11 @@
   <div id="shopping_cart">
     <mat-icon
       style="margin-top: 4px"
-      [matBadge]="cartLength"
+      [matBadge]="cartLength$ | async"
       matBadgeColor="accent"
       matBadgeOverlap="false"
       matBadgePosition="above before"
-      [matBadgeHidden]="cartLength === 0"
+      [matBadgeHidden]="(cartLength$ | async) === 0"
       class="hide-text"
       >shopping_cart</mat-icon
     >
@@ -23,6 +23,7 @@
       matBadgeColor="accent"
       matBadgeOverlap="false"
       matBadgePosition="above before"
+      [matBadgeHidden]="myCollectionLength === 0"
       >library_books</mat-icon
     >
     <label [routerLink]="['/my-collection']">My Collection</label>

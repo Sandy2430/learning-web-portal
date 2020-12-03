@@ -1,6 +1,9 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
@@ -18,6 +21,9 @@ import { BookDetailComponent } from "./shared/book-detail/book-detail.component"
 import { AngularMaterialModule } from "./angular-material/angular-material.module";
 import { NavBarComponent } from "./nav-bar/nav-bar.component";
 import { CompleteBookReferenceComponent } from "./complete-book-reference/complete-book-reference.component";
+import { environment } from "../environments/environment";
+import { booksReducers } from "./store/book-list.reducer";
+import { BookListEffects } from "./store/book-list.effects";
 
 @NgModule({
   declarations: [
@@ -41,6 +47,12 @@ import { CompleteBookReferenceComponent } from "./complete-book-reference/comple
     Ng2SearchPipeModule,
     ReactiveFormsModule,
     HttpClientModule,
+    StoreModule.forRoot({ completeBookSearchList: booksReducers }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([BookListEffects]),
   ],
   providers: [AppService],
   bootstrap: [AppComponent],

@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { BookList, VolumeInfo } from "../models";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { VolumeInfo } from "../models";
+import { AppState } from "../reducers";
+
+import { getSelectedBook } from "../store/book-list.selector";
 
 @Component({
   selector: "app-complete-book-reference",
@@ -9,15 +13,12 @@ import { BookList, VolumeInfo } from "../models";
 })
 export class CompleteBookReferenceComponent implements OnInit {
   bookDetailedView: VolumeInfo;
-  bookList: VolumeInfo;
-  constructor(private activateRoute: ActivatedRoute) {}
+  bookList: any;
+  bookDetailedView$: Observable<VolumeInfo>;
+
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.getFullBookDetails();
-  }
-  getFullBookDetails() {
-    this.activateRoute.queryParams.subscribe((result: any) => {
-      this.bookDetailedView = JSON.parse(result.data);
-    });
+    this.bookDetailedView$ = this.store.select(getSelectedBook);
   }
 }

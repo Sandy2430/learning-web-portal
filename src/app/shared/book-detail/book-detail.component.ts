@@ -1,8 +1,16 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 
 import { BookList, VolumeInfo } from "../../models";
 import { AppService } from "../../app.service";
+import { AppState } from "src/app/reducers";
+import {
+  loadCartCount,
+  loadBuyItem,
+  addBookToCart,
+} from "src/app/store/book-list.action";
+// import { addBookToCart } from "src/app/store/book-list.action";
 
 @Component({
   selector: "app-book-detail",
@@ -15,35 +23,32 @@ export class BookDetailComponent implements OnInit {
   @Input() cartComponent: boolean;
   @Input() myCollection: boolean;
   @Input() bookArray: BookList[];
-  JSON; // @JSON has been defined to overcome JSON.Stringfy undefined error,
-  // which declared in template file.
-  bookInfo: VolumeInfo[] = [];
+
+  bookInfo: VolumeInfo[];
   bookItem: VolumeInfo[] = [];
-  constructor(private appService: AppService, private router: Router) {
-    this.JSON = JSON;
-  }
+  bookItem1: VolumeInfo[] = [];
+  constructor(
+    private appService: AppService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit() {}
   removeItem(bookArray, bookDetails) {
+    bookArray = Object.assign([], bookArray);
     const index = bookArray.indexOf(bookDetails);
-    if (index > -1) {
-      bookArray.splice(index, 1);
-      this.appService.updateCartLength(bookArray.length);
-      localStorage.setItem("cart-item", JSON.stringify(bookArray));
-      this.appService.getUpdatedCartLength().subscribe((cartLength) => {
-        if (cartLength === 0) {
-          this.router.navigate(["/learning-web-portal"]);
-        }
-      });
-    }
-    this.appService.updateCartList(null);
+    bookArray.splice(index, 1);
+    this.store.dispatch(loadCartCount({ cartCount: bookArray.length }));
+    this.store.dispatch(addBookToCart({ cartData: bookArray }));
   }
   addToCart(addToCart) {
+    this.bookItem = Object.assign([], this.bookItem);
     this.bookItem.push(addToCart);
-    localStorage.setItem("cart-item", JSON.stringify(this.bookItem));
-    this.appService.updateCartList(this.bookItem);
-    this.appService.updateCartLength(
-      JSON.parse(localStorage.getItem("cart-item")).length
-    );
+    this.appService.addToCart(this.bookItem);
+    this.store.dispatch(loadCartCount({ cartCount: this.bookItem.length }));
+  }
+  proceedToPurchase(bookDetails) {
+    this.router.navigate(["/billing-details"]);
+    this.store.dispatch(loadBuyItem({ buy: bookDetails }));
   }
 }

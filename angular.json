@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "learning-web-portal"
+  "defaultProject": "learning-web-portal",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

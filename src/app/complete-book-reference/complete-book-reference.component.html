@@ -1,7 +1,7 @@
 <div class="item-detailed-view">
     <app-book-detail
     class="book"
-    [bookDetails]="bookDetailedView"
+    [bookDetails]="(bookDetailedView$ | async)?.volumeInfo"
     [completeBookView]="true"
     [cartComponent]="false"
     [bookArray]="bookList"

@@ -1,7 +1,18 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 
 import { AppService } from "../app.service";
 import { BookList, VolumeInfo } from "../models/book-list.model";
+import {
+  loadSearchData,
+  loadBookList,
+  loadBookListSuccess,
+  loadSpecificBook,
+} from "../store/book-list.action";
+import { BooksState } from "../store/book-list.reducer";
+import { getBooks } from "../store/book-list.selector";
 
 @Component({
   selector: "app-search-item",
@@ -9,26 +20,27 @@ import { BookList, VolumeInfo } from "../models/book-list.model";
   styleUrls: ["./search-item.component.scss"],
 })
 export class SearchItemComponent implements OnInit {
-  JSON; // @JSON has been defined to overcome JSON.Stringfy undefined error,
-        // which declared in template file.
-  bookList: BookList[];
-  bookDetailedView: VolumeInfo;
+  bookList$: Observable<BookList[]>;
   searchLibrary: string;
 
-  constructor(private appService: AppService) {
-    this.JSON = JSON;
+  constructor(
+    private appService: AppService,
+    private store: Store<BooksState>,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
   }
 
-  ngOnInit() {}
-
-  /* Search Click event */
-  searchItem(searchItem) {
-    if (searchItem) {
-      this.appService.getBooks(searchItem).subscribe((books: BookList[]) => {
-        this.bookList = books;
-      });
-    } else {
-      alert("Please Enter search item in search box");
-    }
+  searchItem() {
+    this.store.dispatch(loadSearchData({ searchItem: this.searchLibrary }));
+    this.bookList$ = this.store.select(getBooks);
+    this.appService.getBooks().subscribe((data) => {
+      this.store.dispatch(loadBookListSuccess({ bookListDetails: data }));
+    });
+  }
+  openFullBookView(bookInfo: VolumeInfo) {
+    this.router.navigate(["/full-book-view"]);
+    this.store.dispatch(loadSpecificBook({ book: bookInfo }));
   }
 }

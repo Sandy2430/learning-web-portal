@@ -1,10 +1,14 @@
 import { Component, OnInit, TemplateRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 
 import { AppService } from "../app.service";
 import { VolumeInfo } from "../models";
+import { BooksState } from "../store/book-list.reducer";
+import { loadPurchaseItem } from "../store/book-list.action";
+import { getProceedToBuy } from "../store/book-list.selector";
 
 @Component({
   selector: "app-billing-details-page",
@@ -16,19 +20,23 @@ export class BillingDetailsPageComponent implements OnInit {
   billingForm: FormGroup;
   formValid = false;
   purchasedBook: VolumeInfo;
+  proceedToBuy: VolumeInfo;
   constructor(
     private fb: FormBuilder,
     private activedRoute: ActivatedRoute,
     private appService: AppService,
-    private modalService: BsModalService
-  ) {
-  }
+    private modalService: BsModalService,
+    private store: Store<BooksState>
+  ) {}
 
   ngOnInit() {
+    this.store
+      .select(getProceedToBuy)
+      .subscribe((data) => (this.proceedToBuy = data));
     this.initBillingForm();
-    this.activedRoute.queryParams.subscribe((res: any) => {
-      this.purchasedBook = JSON.parse(res.data);
-    });
+    // this.activedRoute.queryParams.subscribe((res: any) => {
+    //   this.purchasedBook = JSON.parse(res.data);
+    // });
   }
   initBillingForm() {
     this.billingForm = this.fb.group({
@@ -43,12 +51,16 @@ export class BillingDetailsPageComponent implements OnInit {
       template,
       Object.assign({}, { class: "gray modal-sm" })
     );
-    this.appService.updateMyCollectionList({
+    const purchasedBookInfo = {
       userName: formData.userName,
       userEmail: formData.userEmail,
       phoneNumber: formData.phoneNumber,
       address: formData.address,
-      ...this.purchasedBook,
-    });
+      ...this.proceedToBuy,
+    };
+    this.store.dispatch(
+      loadPurchaseItem({ purchaseList: [purchasedBookInfo] })
+    );
+    this.appService.updateMyCollectionList([purchasedBookInfo]);
   }
 }

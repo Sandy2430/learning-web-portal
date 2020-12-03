@@ -38,9 +38,10 @@
       <p>
         {{
           completeBookView
-            ? bookDetails?.description
+            ? (bookDetails?.description | slice: 3: -4)
             : myCollection
-            ? bookDetails?.description
+            ? (bookDetails?.description | slice: 3: -4)
+            : cartComponent ? (bookDetails?.description | slice: 3: -4)
             : !bookDetails?.description
             ? "No description content"
             : (bookDetails?.description | slice: 0:300) + "..."
@@ -50,6 +51,7 @@
   </div>
   <div *ngIf="completeBookView" class="footer-section">
     <button
+      style="margin-bottom: 10px"
       mat-button
       color="accent"
       mat-raised-button
@@ -59,10 +61,11 @@
     </button>
     <button
       mat-button
+      style="margin-bottom: 10px"
       color="accent"
       mat-raised-button
-      [routerLink]="['/billing-details']"
-      [queryParams]="{ data: JSON.stringify(bookDetails) }"
+      (click)="proceedToPurchase(bookDetails)"
+      
     >
       BUY
     </button>
@@ -70,12 +73,14 @@
   <mat-card-footer class="author-info" id="author-info">
     <label class="mat-subheading-2">Written By:</label>
     <div class="author-name">
-      {{ bookDetails?.authors ? bookDetails?.authors : 'No Author information'}}
+      {{
+        bookDetails?.authors ? bookDetails?.authors : "No Author information"
+      }}
       <mat-icon
         *ngIf="cartComponent"
         class="remove-cart-img"
         id="cartIcon"
-        (click)="removeItem(bookArray, bookDetails)"
+        (click)="removeItem(bookArray, (bookDetails))"
         >remove_shopping_cart</mat-icon
       >
     </div>
@@ -122,11 +127,11 @@
 </mat-card>
 <div *ngIf="cartComponent" class="footer-section col-md-12">
   <button
+  style="margin-top: 10px;margin-bottom: 10px"
     mat-button
     color="accent"
     mat-raised-button
-    [routerLink]="['/billing-details']"
-    [queryParams]="{data: JSON.stringify(bookDetails)}"
+    (click)="proceedToPurchase(bookDetails)"
   >
     Proceed to purchase
   </button>
