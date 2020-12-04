@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { VolumeInfo } from "../models";
-import { AppState } from "../reducers";
 
+import { VolumeInfo } from "../models";
+import { BooksState } from "../store/book-list.reducer";
 import { getSelectedBook } from "../store/book-list.selector";
 
 @Component({
@@ -16,7 +16,7 @@ export class CompleteBookReferenceComponent implements OnInit {
   bookList: any;
   bookDetailedView$: Observable<VolumeInfo>;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<BooksState>) {}
 
   ngOnInit() {
     this.bookDetailedView$ = this.store.select(getSelectedBook);

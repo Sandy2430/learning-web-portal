@@ -1,13 +1,14 @@
 import { Component, OnInit, TemplateRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 
-import { AppService } from "../app.service";
 import { VolumeInfo } from "../models";
 import { BooksState } from "../store/book-list.reducer";
-import { loadPurchaseItem } from "../store/book-list.action";
+import {
+  loadPurchaseItem,
+  loadBookPurchasedCount,
+} from "../store/book-list.action";
 import { getProceedToBuy } from "../store/book-list.selector";
 
 @Component({
@@ -23,8 +24,6 @@ export class BillingDetailsPageComponent implements OnInit {
   proceedToBuy: VolumeInfo;
   constructor(
     private fb: FormBuilder,
-    private activedRoute: ActivatedRoute,
-    private appService: AppService,
     private modalService: BsModalService,
     private store: Store<BooksState>
   ) {}
@@ -34,9 +33,6 @@ export class BillingDetailsPageComponent implements OnInit {
       .select(getProceedToBuy)
       .subscribe((data) => (this.proceedToBuy = data));
     this.initBillingForm();
-    // this.activedRoute.queryParams.subscribe((res: any) => {
-    //   this.purchasedBook = JSON.parse(res.data);
-    // });
   }
   initBillingForm() {
     this.billingForm = this.fb.group({
@@ -61,6 +57,8 @@ export class BillingDetailsPageComponent implements OnInit {
     this.store.dispatch(
       loadPurchaseItem({ purchaseList: [purchasedBookInfo] })
     );
-    this.appService.updateMyCollectionList([purchasedBookInfo]);
+    this.store.dispatch(
+      loadBookPurchasedCount({ purchasedCount: [purchasedBookInfo].length })
+    );
   }
 }

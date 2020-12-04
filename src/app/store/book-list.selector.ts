@@ -36,3 +36,7 @@ export const getPurchasedList = createSelector(
   getBookFeatureState,
   (state: BooksState) => state.purchasedItem
 );
+export const getCollectionCount = createSelector(
+    getBookFeatureState,
+    (state: BooksState) => state.collectionCount
+  );

@@ -30,6 +30,10 @@ export const getBookPurchasedData = createAction(
   "[Get Book Purchased Data]",
   props<{ purchasedInfo: VolumeInfo }>()
 );
+export const loadBookPurchasedCount = createAction(
+  "[Get Book Purchased Count]",
+  props<{ purchasedCount: number }>()
+);
 export const deleteCartItem = createAction(
   "Delete Item from cart list",
   props<{ cartList: VolumeInfo[]; index: number }>()

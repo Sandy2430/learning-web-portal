@@ -1,4 +1,4 @@
-import { createReducer, on, } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import { BookList, VolumeInfo } from "../models";
 import * as BookListAction from "../store/book-list.action";
 
@@ -9,6 +9,7 @@ export interface BooksState {
   selectedBook: VolumeInfo;
   cartItem: VolumeInfo[];
   cartCount: number;
+  collectionCount: number;
   proceedToBuy: VolumeInfo;
   purchasedItem: VolumeInfo[];
 }
@@ -21,6 +22,7 @@ export const initialState: BooksState = {
   cartCount: null,
   proceedToBuy: undefined,
   purchasedItem: [],
+  collectionCount: null,
 };
 
 export const booksReducers = createReducer(
@@ -72,6 +74,12 @@ export const booksReducers = createReducer(
       purchasedItem: action.purchaseList,
     };
   }),
+  on(BookListAction.loadBookPurchasedCount, (state, action) => {
+    return {
+      ...state,
+      collectionCount: action.purchasedCount,
+    };
+  }),
   on(BookListAction.deleteCartItem, (state, action) => {
     return {
       ...state,
@@ -81,4 +89,3 @@ export const booksReducers = createReducer(
     };
   })
 );
-

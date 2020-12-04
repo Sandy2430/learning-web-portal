@@ -19,11 +19,11 @@
   <div>
     <mat-icon
       style="margin-top: 4px"
-      [matBadge]="myCollectionLength"
+      [matBadge]="collectionLength$ | async"
       matBadgeColor="accent"
       matBadgeOverlap="false"
       matBadgePosition="above before"
-      [matBadgeHidden]="myCollectionLength === 0"
+      [matBadgeHidden]="(collectionLength$ | async) === 0"
       >library_books</mat-icon
     >
     <label [routerLink]="['/my-collection']">My Collection</label>

@@ -3,14 +3,12 @@ import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 
 import { BookList, VolumeInfo } from "../../models";
-import { AppService } from "../../app.service";
-import { AppState } from "src/app/reducers";
 import {
   loadCartCount,
   loadBuyItem,
   addBookToCart,
 } from "src/app/store/book-list.action";
-// import { addBookToCart } from "src/app/store/book-list.action";
+import { BooksState } from "src/app/store/book-list.reducer";
 
 @Component({
   selector: "app-book-detail",
@@ -28,9 +26,8 @@ export class BookDetailComponent implements OnInit {
   bookItem: VolumeInfo[] = [];
   bookItem1: VolumeInfo[] = [];
   constructor(
-    private appService: AppService,
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<BooksState>
   ) {}
 
   ngOnInit() {}
@@ -44,7 +41,7 @@ export class BookDetailComponent implements OnInit {
   addToCart(addToCart) {
     this.bookItem = Object.assign([], this.bookItem);
     this.bookItem.push(addToCart);
-    this.appService.addToCart(this.bookItem);
+    this.store.dispatch(addBookToCart({ cartData: this.bookItem }));
     this.store.dispatch(loadCartCount({ cartCount: this.bookItem.length }));
   }
   proceedToPurchase(bookDetails) {
