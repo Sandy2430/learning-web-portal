@@ -33,12 +33,16 @@ export class SearchItemComponent implements OnInit {
   ngOnInit() {}
 
   searchItem() {
-    this.store.dispatch(loadSearchData({ searchItem: this.searchLibrary }));
-    this.bookList$ = this.store.select(getBooks);
-    this.store.dispatch(loadBookList());
-    // this.appService.getBooks().subscribe((data) => {
-    //   this.store.dispatch(loadBookListSuccess({ bookListDetails: data }));
-    // });
+    if (this.searchLibrary) {
+      this.store.dispatch(loadSearchData({ searchItem: this.searchLibrary }));
+      this.bookList$ = this.store.select(getBooks);
+      this.store.dispatch(loadBookList());
+      // this.appService.getBooks().subscribe((data) => {
+      //   this.store.dispatch(loadBookListSuccess({ bookListDetails: data }));
+      // });
+    } else {
+      alert("Search box is empty");
+    }
   }
   openFullBookView(bookInfo: VolumeInfo) {
     this.router.navigate(["/full-book-view"]);

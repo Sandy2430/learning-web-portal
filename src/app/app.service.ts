@@ -68,14 +68,15 @@ export class AppService {
       searchString = res;
     });
     const uri = "?q=";
-    if (searchString) {
-      return this.http
-        .get<BookList[]>(`${this.baseUrl}${uri}${searchString}`)
-        .pipe(
-          pluck("items"),
-          map((books: BookList[]) => books)
-        );
-    }
+    return this.http
+      .get<BookList[]>(`${this.baseUrl}${uri}${searchString}`)
+      .pipe(
+        pluck("items"),
+        map(
+          (books: BookList[]) => books,
+          (err) => console.log("Error Message", err)
+        )
+      );
   }
   /* Fetch specific book data */
   getFullBookData(volumeId: string): Observable<BookList> {
