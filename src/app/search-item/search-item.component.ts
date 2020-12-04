@@ -13,6 +13,7 @@ import {
 } from "../store/book-list.action";
 import { BooksState } from "../store/book-list.reducer";
 import { getBooks } from "../store/book-list.selector";
+import { loadBooks } from "../store_old/books.actions";
 
 @Component({
   selector: "app-search-item",
@@ -29,15 +30,15 @@ export class SearchItemComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   searchItem() {
     this.store.dispatch(loadSearchData({ searchItem: this.searchLibrary }));
     this.bookList$ = this.store.select(getBooks);
-    this.appService.getBooks().subscribe((data) => {
-      this.store.dispatch(loadBookListSuccess({ bookListDetails: data }));
-    });
+    this.store.dispatch(loadBookList());
+    // this.appService.getBooks().subscribe((data) => {
+    //   this.store.dispatch(loadBookListSuccess({ bookListDetails: data }));
+    // });
   }
   openFullBookView(bookInfo: VolumeInfo) {
     this.router.navigate(["/full-book-view"]);
