@@ -4,6 +4,7 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
 import { BookList, VolumeInfo } from "../models/book-list.model";
+import { BookListFacadeService } from "../store/book-list-facade.service";
 import {
   loadSearchData,
   loadBookList,
@@ -21,24 +22,22 @@ export class SearchItemComponent implements OnInit {
   bookList$: Observable<BookList[]>;
   searchLibrary: string;
 
-  constructor(
-    private store: Store<BooksState>,
-    private router: Router
-  ) {}
+  constructor(private bookFacade: BookListFacadeService) {}
 
   ngOnInit() {}
-
-  searchItem() {
+  getSearchItem() {
     if (this.searchLibrary) {
-      this.store.dispatch(loadSearchData({ searchItem: this.searchLibrary }));
-      this.bookList$ = this.store.select(getBooks);
-      this.store.dispatch(loadBookList());
+      this.bookFacade.dispatch(
+        loadSearchData({ searchItem: this.searchLibrary })
+      );
+      this.bookList$ = this.bookFacade.getBookList();
+      this.bookFacade.dispatch(loadBookList());
     } else {
       alert("Search box is empty");
     }
   }
+
   openFullBookView(bookInfo: VolumeInfo) {
-    this.router.navigate(["/full-book-view"]);
-    this.store.dispatch(loadSpecificBook({ book: bookInfo }));
+    this.bookFacade.dispatch(loadSpecificBook({ book: bookInfo }));
   }
 }

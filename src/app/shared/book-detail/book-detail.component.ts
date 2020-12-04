@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Store } from "@ngrx/store";
 
 import { BookList, VolumeInfo } from "../../models";
 import {
@@ -8,7 +6,7 @@ import {
   loadBuyItem,
   addBookToCart,
 } from "src/app/store/book-list.action";
-import { BooksState } from "src/app/store/book-list.reducer";
+import { BookListFacadeService } from "src/app/store/book-list-facade.service";
 
 @Component({
   selector: "app-book-detail",
@@ -25,27 +23,29 @@ export class BookDetailComponent implements OnInit {
   bookInfo: VolumeInfo[];
   bookItem: VolumeInfo[] = [];
   bookItem1: VolumeInfo[] = [];
-  constructor(
-    private router: Router,
-    private store: Store<BooksState>
-  ) {}
+
+  constructor(private bookFacade: BookListFacadeService) {}
 
   ngOnInit() {}
+
   removeItem(bookArray, bookDetails) {
     bookArray = Object.assign([], bookArray);
     const index = bookArray.indexOf(bookDetails);
     bookArray.splice(index, 1);
-    this.store.dispatch(loadCartCount({ cartCount: bookArray.length }));
-    this.store.dispatch(addBookToCart({ cartData: bookArray }));
+    this.bookFacade.dispatch(addBookToCart({ cartData: bookArray }));
+    this.bookFacade.dispatch(loadCartCount({ cartCount: bookArray.length }));
   }
+
   addToCart(addToCart) {
     this.bookItem = Object.assign([], this.bookItem);
     this.bookItem.push(addToCart);
-    this.store.dispatch(addBookToCart({ cartData: this.bookItem }));
-    this.store.dispatch(loadCartCount({ cartCount: this.bookItem.length }));
+    this.bookFacade.dispatch(addBookToCart({ cartData: this.bookItem }));
+    this.bookFacade.dispatch(
+      loadCartCount({ cartCount: this.bookItem.length })
+    );
   }
+  
   proceedToPurchase(bookDetails) {
-    this.router.navigate(["/billing-details"]);
-    this.store.dispatch(loadBuyItem({ buy: bookDetails }));
+    this.bookFacade.dispatch(loadBuyItem({ buy: bookDetails }));
   }
 }

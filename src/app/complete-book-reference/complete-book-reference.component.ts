@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
 import { VolumeInfo } from "../models";
-import { BooksState } from "../store/book-list.reducer";
-import { getSelectedBook } from "../store/book-list.selector";
+import { BookListFacadeService } from "../store/book-list-facade.service";
+
 
 @Component({
   selector: "app-complete-book-reference",
@@ -16,9 +15,9 @@ export class CompleteBookReferenceComponent implements OnInit {
   bookList: any;
   bookDetailedView$: Observable<VolumeInfo>;
 
-  constructor(private store: Store<BooksState>) {}
+  constructor(private bookFacade: BookListFacadeService) {}
 
   ngOnInit() {
-    this.bookDetailedView$ = this.store.select(getSelectedBook);
+    this.bookDetailedView$ = this.bookFacade.getCompleteBookInfo();
   }
 }

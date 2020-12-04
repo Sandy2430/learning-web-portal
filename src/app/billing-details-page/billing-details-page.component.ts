@@ -1,15 +1,14 @@
 import { Component, OnInit, TemplateRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Store } from "@ngrx/store";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 
 import { VolumeInfo } from "../models";
-import { BooksState } from "../store/book-list.reducer";
 import {
   loadPurchaseItem,
   loadBookPurchasedCount,
 } from "../store/book-list.action";
-import { getProceedToBuy } from "../store/book-list.selector";
+import { BookListFacadeService } from "../store/book-list-facade.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-billing-details-page",
@@ -22,16 +21,16 @@ export class BillingDetailsPageComponent implements OnInit {
   formValid = false;
   purchasedBook: VolumeInfo;
   proceedToBuy: VolumeInfo;
+  proceedToBuy$: Observable<VolumeInfo>;
   constructor(
     private fb: FormBuilder,
     private modalService: BsModalService,
-    private store: Store<BooksState>
+    private bookFacade: BookListFacadeService
   ) {}
 
   ngOnInit() {
-    this.store
-      .select(getProceedToBuy)
-      .subscribe((data) => (this.proceedToBuy = data));
+    this.proceedToBuy$ = this.bookFacade.getProceedToBuyInfo();
+    this.proceedToBuy$.subscribe((data) => (this.proceedToBuy = data));
     this.initBillingForm();
   }
   initBillingForm() {
@@ -54,10 +53,10 @@ export class BillingDetailsPageComponent implements OnInit {
       address: formData.address,
       ...this.proceedToBuy,
     };
-    this.store.dispatch(
+    this.bookFacade.dispatch(
       loadPurchaseItem({ purchaseList: [purchasedBookInfo] })
     );
-    this.store.dispatch(
+    this.bookFacade.dispatch(
       loadBookPurchasedCount({ purchasedCount: [purchasedBookInfo].length })
     );
   }

@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
-import { BooksState } from "../store/book-list.reducer";
-import { getCartCount, getCollectionCount } from "../store/book-list.selector";
+import { BookListFacadeService } from "../store/book-list-facade.service";
+
 
 @Component({
   selector: "app-nav-bar",
@@ -11,16 +10,14 @@ import { getCartCount, getCollectionCount } from "../store/book-list.selector";
   styleUrls: ["./nav-bar.component.scss"],
 })
 export class NavBarComponent implements OnInit {
-  cartLength: number;
   cartLength$: Observable<number>;
   collectionLength$: Observable<number>;
-  myCollectionLength: number;
   constructor(
-    private store: Store<BooksState>
+    private bookFacade: BookListFacadeService,
   ) {}
 
   ngOnInit() {
-    this.cartLength$ = this.store.select(getCartCount);
-    this.collectionLength$ = this.store.select(getCollectionCount);
+    this.cartLength$ = this.bookFacade.getCartLength();
+    this.collectionLength$ = this.bookFacade.getMyCollectionLength();
   }
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
 import { VolumeInfo } from "../models";
-import { BooksState } from "../store/book-list.reducer";
-import { getCartCount, getCartItem } from "../store/book-list.selector";
+import { BookListFacadeService } from "../store/book-list-facade.service";
+
 
 @Component({
   selector: "app-cart",
@@ -12,17 +11,14 @@ import { getCartCount, getCartItem } from "../store/book-list.selector";
   styleUrls: ["./cart.component.scss"],
 })
 export class CartComponent implements OnInit {
-  populateCartItem: VolumeInfo[] = [];
   populateCartItem$: Observable<VolumeInfo[]>;
-  cartCount: number;
+  cartCount$: Observable<number>;
   constructor(
-    private store: Store<BooksState>
+    private bookFacade: BookListFacadeService
   ) {}
 
   ngOnInit() {
-    this.populateCartItem$ = this.store.select(getCartItem);
-    this.store.select(getCartCount).subscribe((count) => {
-      this.cartCount = count;
-    });
+    this.populateCartItem$ = this.bookFacade.getCartItems();
+    this.cartCount$ = this.bookFacade.getCartLength();
   }
 }

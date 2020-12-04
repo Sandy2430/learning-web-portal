@@ -65,7 +65,7 @@
       color="accent"
       mat-raised-button
       (click)="proceedToPurchase(bookDetails)"
-      
+      [routerLink]="['/billing-details']"
     >
       BUY
     </button>
@@ -132,6 +132,7 @@
     color="accent"
     mat-raised-button
     (click)="proceedToPurchase(bookDetails)"
+    [routerLink]="['/billing-details']"
   >
     Proceed to purchase
   </button>

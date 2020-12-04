@@ -9,7 +9,7 @@
     />
   </mat-form-field>
   <span style="height: 100%; width: 100%">
-    <mat-icon class="search-icon" (click)="searchItem()"
+    <mat-icon class="search-icon" (click)="getSearchItem()"
       >search</mat-icon
     ></span
   >
@@ -22,5 +22,6 @@
     [bookArray]="bookList"
     *ngFor="let books of (bookList$ | async )| filter: searchLibrary"
     (click)="openFullBookView(books)"
+    [routerLink]="['/full-book-view']"
   ></app-book-detail> 
 </div>
