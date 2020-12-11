@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { BookList, VolumeInfo } from "../models";
+import { BookList, VolumeInfo } from "../../models";
 
 export const loadSearchData = createAction(
   "[Get Search String]",
@@ -26,21 +26,13 @@ export const loadCartCount = createAction(
   "[Get Cart Count]",
   props<{ cartCount: number }>()
 );
-export const getBookPurchasedData = createAction(
-  "[Get Book Purchased Data]",
-  props<{ purchasedInfo: VolumeInfo }>()
+export const loadBuyItem = createAction(
+  "Load PurchaseItem",
+  props<{ buy: VolumeInfo }>()
 );
 export const loadBookPurchasedCount = createAction(
   "[Get Book Purchased Count]",
   props<{ purchasedCount: number }>()
-);
-export const deleteCartItem = createAction(
-  "Delete Item from cart list",
-  props<{ cartList: VolumeInfo[]; index: number }>()
-);
-export const loadBuyItem = createAction(
-  "Load PurchaseItem",
-  props<{ buy: VolumeInfo }>()
 );
 export const loadPurchaseItem = createAction(
   "Load PurchaseItem",

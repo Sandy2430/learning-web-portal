@@ -1,1 +1,1 @@
-export * from '../models/book-list.model';
+export * from "../models/book-list.model";

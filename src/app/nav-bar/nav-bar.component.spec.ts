@@ -3,15 +3,20 @@ import { NavBarComponent } from "./nav-bar.component";
 
 describe("OptionSectionComponent", () => {
   let fixture: NavBarComponent;
-  let mockAppService: any;
+  let mockFacadeService: any;
 
   beforeEach(() => {
-    mockAppService = {
-      getUpdatedCartLength: jest.fn(),
-      getUpdatedMyCollectionList: jest.fn(),
+    mockFacadeService = {
+      getBookList: jest.fn(),
+      getCompleteBookInfo: jest.fn(),
+      getCartItems: jest.fn(),
+      getCartLength: jest.fn(),
+      getProceedToBuyInfo: jest.fn(),
+      getPurchasedData: jest.fn(),
       getMyCollectionLength: jest.fn(),
+      dispatch: jest.fn(),
     };
-    fixture = new NavBarComponent(mockAppService);
+    fixture = new NavBarComponent(mockFacadeService);
   });
   describe("Test: NavBarComponent", () => {
     it("should create", () => {
@@ -22,29 +27,19 @@ describe("OptionSectionComponent", () => {
     it("should get updated cart length value", () => {
       const responseData = 1;
       const spygetUpdatedCartLength = jest
-        .spyOn(mockAppService, "getUpdatedCartLength")
+        .spyOn(mockFacadeService, "getCartLength")
         .mockReturnValue(responseData);
-      expect(mockAppService.getUpdatedCartLength()).toBe(responseData);
+      expect(mockFacadeService.getCartLength()).toBe(responseData);
       expect(spygetUpdatedCartLength).toHaveBeenCalled();
-    });
-  });
-  describe("Test: getUpdatedMyCollectionList function", () => {
-    it("should get updated my collection length value", () => {
-      const responseData = 1;
-      const spygetUpdatedMyCollectionList = jest
-        .spyOn(mockAppService, "getUpdatedMyCollectionList")
-        .mockReturnValue(responseData);
-      expect(mockAppService.getUpdatedMyCollectionList()).toBe(responseData);
-      expect(spygetUpdatedMyCollectionList).toHaveBeenCalled();
     });
   });
   describe("Test: getMyCollectionLength function", () => {
     it("should get my collection length value", () => {
       const responseData = 1;
       const spygetMyCollectionLength = jest
-        .spyOn(mockAppService, "getMyCollectionLength")
+        .spyOn(mockFacadeService, "getMyCollectionLength")
         .mockReturnValue(responseData);
-      expect(mockAppService.getMyCollectionLength()).toBe(responseData);
+      expect(mockFacadeService.getMyCollectionLength()).toBe(responseData);
       expect(spygetMyCollectionLength).toHaveBeenCalled();
     });
   });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { BookListFacadeService } from "../store/book-list-facade.service";
+import { BookListFacadeService } from "../store/facade/book-list-facade.service";
 
 
 @Component({

@@ -1,11 +1,13 @@
 import { createReducer, on } from "@ngrx/store";
-import { BookList, VolumeInfo } from "../models";
-import * as BookListAction from "../store/book-list.action";
+import { Action } from "@ngrx/store/src/models";
+import { BookList, VolumeInfo } from "../../models";
+import * as BookListAction from "../action";
 
 export const bookStateRootFeatureKey = "SearchBookList";
 export interface BooksState {
   searchBook: string;
   bookList: BookList[];
+  bookError: string;
   selectedBook: VolumeInfo;
   cartItem: VolumeInfo[];
   cartCount: number;
@@ -17,6 +19,7 @@ export interface BooksState {
 export const initialState: BooksState = {
   searchBook: "",
   bookList: [],
+  bookError: "",
   selectedBook: undefined,
   cartItem: [],
   cartCount: null,
@@ -42,6 +45,12 @@ export const booksReducers = createReducer(
     return {
       ...state,
       bookList: action.bookListDetails,
+    };
+  }),
+  on(BookListAction.loadBookListFailure, (state, action) => {
+    return {
+      ...state,
+      bookError: action.bookError,
     };
   }),
   on(BookListAction.loadSpecificBook, (state, action) => {
@@ -79,13 +88,9 @@ export const booksReducers = createReducer(
       ...state,
       collectionCount: action.purchasedCount,
     };
-  }),
-  on(BookListAction.deleteCartItem, (state, action) => {
-    return {
-      ...state,
-      cartItem: action.cartList.filter((cartItem, bookIndex) => {
-        return bookIndex !== action.index;
-      }),
-    };
   })
 );
+
+export function reducer(state: BooksState, action: Action) {
+  return booksReducers(state, action);
+}

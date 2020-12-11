@@ -1,14 +1,11 @@
 import { Component, OnInit, TemplateRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { Observable } from "rxjs";
 
 import { VolumeInfo } from "../models";
-import {
-  loadPurchaseItem,
-  loadBookPurchasedCount,
-} from "../store/book-list.action";
-import { BookListFacadeService } from "../store/book-list-facade.service";
-import { Observable } from "rxjs";
+import * as BookActions from "../store/action/book-list.action";
+import { BookListFacadeService } from "../store/facade/book-list-facade.service";
 
 @Component({
   selector: "app-billing-details-page",
@@ -54,10 +51,10 @@ export class BillingDetailsPageComponent implements OnInit {
       ...this.proceedToBuy,
     };
     this.bookFacade.dispatch(
-      loadPurchaseItem({ purchaseList: [purchasedBookInfo] })
+      BookActions.loadPurchaseItem({ purchaseList: [purchasedBookInfo] })
     );
     this.bookFacade.dispatch(
-      loadBookPurchasedCount({ purchasedCount: [purchasedBookInfo].length })
+      BookActions.loadBookPurchasedCount({ purchasedCount: [purchasedBookInfo].length })
     );
   }
 }

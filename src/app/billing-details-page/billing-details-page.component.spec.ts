@@ -6,50 +6,21 @@ import { BillingDetailsPageComponent } from "./billing-details-page.component";
 
 describe("BillingDetailsPageComponent", () => {
   let fixture: BillingDetailsPageComponent;
-  let mockAppService: any;
+  let mockFacadeService: any;
   let formBuilderMock: FormBuilder;
-  let routeMock: any;
   let modalServiceMock: any;
 
   beforeEach(() => {
-    mockAppService = {
-      updateMyCollectionList: jest.fn(),
+    mockFacadeService = {
+      getProceedToBuyInfo: jest.fn(),
     };
     formBuilderMock = new FormBuilder();
-    routeMock = {
-      queryParams: of(
-        convertToParamMap({
-          allowAnonLogging: null,
-          authors: [],
-          averageRating: null,
-          canonicalVolumeLink: "",
-          categories: [],
-          contentVersion: "",
-          description: "",
-          imageLinks: {},
-          industryIdentifiers: [],
-          infoLink: "",
-          language: "",
-          maturityRating: "",
-          pageCount: null,
-          panelizationSummary: {},
-          previewLink: "",
-          printType: "",
-          publishedDate: "",
-          publisher: "",
-          ratingsCount: null,
-          readingModes: {},
-          title: "",
-        })
-      ),
-    };
     fixture = new BillingDetailsPageComponent(
       formBuilderMock,
-      routeMock,
-      mockAppService,
+      mockFacadeService,
       modalServiceMock
     );
-    fixture.ngOnInit();
+    // fixture.ngOnInit();
   });
 
   describe("Test: ngOnInit", () => {
@@ -63,10 +34,8 @@ describe("BillingDetailsPageComponent", () => {
         phoneNumber: "",
         address: "",
       };
+      fixture.initBillingForm();
       expect(fixture.billingForm.value).toEqual(mockBillingForm);
-    });
-    it("Should get query params", () => {
-      expect(routeMock.queryParams).toBeTruthy();
     });
     it("Billing form should be valid", () => {
       const mockBillingForm = {
@@ -75,6 +44,7 @@ describe("BillingDetailsPageComponent", () => {
         phoneNumber: "9876543210",
         address: "Chennai Anna nagar",
       };
+      fixture.initBillingForm();
       fixture.billingForm.controls.userName.setValue("Sandeep");
       fixture.billingForm.controls.userEmail.setValue("sandeep@gmail.com");
       fixture.billingForm.controls.phoneNumber.setValue("9876543210");
@@ -83,29 +53,29 @@ describe("BillingDetailsPageComponent", () => {
       expect(fixture.billingForm.valid).toBeTruthy();
     });
     it("User name should be invalid", () => {
+      fixture.initBillingForm();
       fixture.billingForm.controls.userName.setValue("");
       expect(fixture.billingForm.controls.userName.invalid).toBeTruthy();
     });
     it("User email should be invalid", () => {
+      fixture.initBillingForm();
       fixture.billingForm.controls.userEmail.setValue("");
       expect(fixture.billingForm.controls.userEmail.invalid).toBeTruthy();
     });
     it("User phone nuber should be invalid", () => {
+      fixture.initBillingForm();
       fixture.billingForm.controls.phoneNumber.setValue("");
       expect(fixture.billingForm.controls.phoneNumber.invalid).toBeTruthy();
     });
     it("User address should be invalid", () => {
+      fixture.initBillingForm();
       fixture.billingForm.controls.address.setValue("");
       expect(fixture.billingForm.controls.address.invalid).toBeTruthy();
     });
   });
-  describe("Test: Query params", () => {
-    it("Should get query params", () => {
-      expect(routeMock.queryParams).toBeTruthy();
-    });
-  });
-  describe("Test: App service", () => {
-    it("updateMyCollectionList", () => {
+
+  describe("Test: Facade service", () => {
+    it("getProceedToBuyInfo", () => {
       const response = {
         allowAnonLogging: null,
         userName: "",
@@ -134,9 +104,9 @@ describe("BillingDetailsPageComponent", () => {
         title: "",
       };
       const spyupdateMyCollectionList = jest
-        .spyOn(mockAppService, "updateMyCollectionList")
+        .spyOn(mockFacadeService, "getProceedToBuyInfo")
         .mockReturnValue(response);
-      expect(mockAppService.updateMyCollectionList()).toBe(response);
+      expect(mockFacadeService.getProceedToBuyInfo()).toBe(response);
       expect(spyupdateMyCollectionList).toHaveBeenCalled();
     });
   });

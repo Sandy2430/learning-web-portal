@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Action, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
-import { BookList, VolumeInfo } from "../models";
-import { BooksState } from "./book-list.reducer";
-import * as BookSelectors from "./book-list.selector";
+import { BookList, VolumeInfo } from "../../models";
+import { BooksState } from "../reducer/book-list.reducer";
+import * as BookSelectors from "../selector/book-list.selector";
 
 @Injectable({
   providedIn: "root",

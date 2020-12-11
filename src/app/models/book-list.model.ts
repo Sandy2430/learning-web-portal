@@ -1,6 +1,6 @@
 export interface BookList {
     accessInfo: AccessInfo;
-    etage: string;
+    etag: string;
     id: string;
     kind: string;
     saleInfo: SaleInfo;

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { BooksState } from "./book-list.reducer";
+import { BooksState } from "../reducer/book-list.reducer";
 
 const getBookFeatureState = createFeatureSelector<BooksState>(
   "completeBookSearchList"

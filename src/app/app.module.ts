@@ -22,8 +22,8 @@ import { AngularMaterialModule } from "./angular-material/angular-material.modul
 import { NavBarComponent } from "./nav-bar/nav-bar.component";
 import { CompleteBookReferenceComponent } from "./complete-book-reference/complete-book-reference.component";
 import { environment } from "../environments/environment";
-import { booksReducers } from "./store/book-list.reducer";
-import { BookListEffects } from "./store/book-list.effects";
+import { booksReducers } from "./store/reducer/book-list.reducer";
+import { BookListEffects } from "./store/effect/book-list.effects";
 
 @NgModule({
   declarations: [

@@ -1,12 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 import { BookList, VolumeInfo } from "../../models";
-import {
-  loadCartCount,
-  loadBuyItem,
-  addBookToCart,
-} from "src/app/store/book-list.action";
-import { BookListFacadeService } from "src/app/store/book-list-facade.service";
+import * as BookActions from "src/app/store/action/book-list.action";
+import { BookListFacadeService } from "src/app/store/facade/book-list-facade.service";
 
 @Component({
   selector: "app-book-detail",
@@ -32,20 +28,20 @@ export class BookDetailComponent implements OnInit {
     bookArray = Object.assign([], bookArray);
     const index = bookArray.indexOf(bookDetails);
     bookArray.splice(index, 1);
-    this.bookFacade.dispatch(addBookToCart({ cartData: bookArray }));
-    this.bookFacade.dispatch(loadCartCount({ cartCount: bookArray.length }));
+    this.bookFacade.dispatch(BookActions.addBookToCart({ cartData: bookArray }));
+    this.bookFacade.dispatch(BookActions.loadCartCount({ cartCount: bookArray.length }));
   }
 
   addToCart(addToCart) {
     this.bookItem = Object.assign([], this.bookItem);
     this.bookItem.push(addToCart);
-    this.bookFacade.dispatch(addBookToCart({ cartData: this.bookItem }));
+    this.bookFacade.dispatch(BookActions.addBookToCart({ cartData: this.bookItem }));
     this.bookFacade.dispatch(
-      loadCartCount({ cartCount: this.bookItem.length })
+      BookActions.loadCartCount({ cartCount: this.bookItem.length })
     );
   }
-  
+
   proceedToPurchase(bookDetails) {
-    this.bookFacade.dispatch(loadBuyItem({ buy: bookDetails }));
+    this.bookFacade.dispatch(BookActions.loadBuyItem({ buy: bookDetails }));
   }
 }
