@@ -57,6 +57,14 @@ export class BookListFacadeService {
   proceedToPurchase(bookDetails: VolumeInfo) {
     return this.store.dispatch(bookAction.loadBuyItem({ buy: bookDetails }));
   }
+  loadPurchaseItem(purchasedBookInfo) {
+    return this.store.dispatch(
+      bookAction.loadPurchaseItem({ purchaseList: purchasedBookInfo })
+    );
+  }
+  loadBookPurchasedCount(count: number) {
+    return this.store.dispatch(bookAction.loadBookPurchasedCount({ purchasedCount: count }));
+  }
   dispatch(action: Action) {
     this.store.dispatch(action);
   }

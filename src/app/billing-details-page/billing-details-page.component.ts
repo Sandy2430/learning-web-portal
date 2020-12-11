@@ -50,11 +50,7 @@ export class BillingDetailsPageComponent implements OnInit {
       address: formData.address,
       ...this.proceedToBuy,
     };
-    this.bookFacade.dispatch(
-      BookActions.loadPurchaseItem({ purchaseList: [purchasedBookInfo] })
-    );
-    this.bookFacade.dispatch(
-      BookActions.loadBookPurchasedCount({ purchasedCount: [purchasedBookInfo].length })
-    );
+    this.bookFacade.loadPurchaseItem([purchasedBookInfo]);
+    this.bookFacade.loadBookPurchasedCount([purchasedBookInfo].length);
   }
 }
