@@ -19,17 +19,15 @@ export class SearchItemComponent implements OnInit {
   ngOnInit() {}
   getSearchItem() {
     if (this.searchLibrary) {
-      this.bookFacade.dispatch(
-        BookActions.loadSearchData({ searchItem: this.searchLibrary })
-      );
+      this.bookFacade.loadSearchString(this.searchLibrary);
       this.bookList$ = this.bookFacade.getBookList();
-      this.bookFacade.dispatch(BookActions.loadBookList());
+      this.bookFacade.loadBookList();
     } else {
       alert("Search box is empty");
     }
   }
 
   openFullBookView(bookInfo: BookModels.VolumeInfo) {
-    this.bookFacade.dispatch(BookActions.loadSpecificBook({ book: bookInfo }));
+    this.bookFacade.getSpecificBookInfo(bookInfo);
   }
 }

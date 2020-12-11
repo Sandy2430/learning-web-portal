@@ -28,20 +28,18 @@ export class BookDetailComponent implements OnInit {
     bookArray = Object.assign([], bookArray);
     const index = bookArray.indexOf(bookDetails);
     bookArray.splice(index, 1);
-    this.bookFacade.dispatch(BookActions.addBookToCart({ cartData: bookArray }));
-    this.bookFacade.dispatch(BookActions.loadCartCount({ cartCount: bookArray.length }));
+    this.bookFacade.addToCart(bookArray);
+    this.bookFacade.getCartCount(bookArray.length);
   }
 
   addToCart(addToCart) {
     this.bookItem = Object.assign([], this.bookItem);
     this.bookItem.push(addToCart);
-    this.bookFacade.dispatch(BookActions.addBookToCart({ cartData: this.bookItem }));
-    this.bookFacade.dispatch(
-      BookActions.loadCartCount({ cartCount: this.bookItem.length })
-    );
+    this.bookFacade.addToCart(this.bookItem);
+    this.bookFacade.getCartCount(this.bookItem.length);
   }
 
   proceedToPurchase(bookDetails) {
-    this.bookFacade.dispatch(BookActions.loadBuyItem({ buy: bookDetails }));
+    this.bookFacade.proceedToPurchase(bookDetails);
   }
 }
