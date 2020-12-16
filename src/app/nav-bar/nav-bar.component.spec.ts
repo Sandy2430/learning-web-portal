@@ -1,4 +1,4 @@
-
+import { of } from "rxjs";
 import { NavBarComponent } from "./nav-bar.component";
 
 describe("OptionSectionComponent", () => {
@@ -19,28 +19,34 @@ describe("OptionSectionComponent", () => {
     fixture = new NavBarComponent(mockFacadeService);
   });
   describe("Test: NavBarComponent", () => {
-    it("should create", () => {
-      expect(fixture).toBeTruthy();
+    test("should create", () => {
+      expect(fixture).toBeDefined();
     });
   });
   describe("Test: getUpdatedCartLength function", () => {
-    it("should get updated cart length value", () => {
+    test("should get updated cart length value", () => {
       const responseData = 1;
-      const spygetUpdatedCartLength = jest
-        .spyOn(mockFacadeService, "getCartLength")
-        .mockReturnValue(responseData);
-      expect(mockFacadeService.getCartLength()).toBe(responseData);
-      expect(spygetUpdatedCartLength).toHaveBeenCalled();
+      fixture.bookFacade = mockFacadeService;
+      spyOn(mockFacadeService, "getCartLength").and.returnValue(
+        of(responseData)
+      );
+      fixture.ngOnInit();
+      fixture.cartLength$.subscribe((cartLen) => {
+        expect(cartLen).toEqual(responseData);
+      });
     });
   });
   describe("Test: getMyCollectionLength function", () => {
-    it("should get my collection length value", () => {
+    test("should get my collection length value", () => {
       const responseData = 1;
-      const spygetMyCollectionLength = jest
-        .spyOn(mockFacadeService, "getMyCollectionLength")
-        .mockReturnValue(responseData);
-      expect(mockFacadeService.getMyCollectionLength()).toBe(responseData);
-      expect(spygetMyCollectionLength).toHaveBeenCalled();
+      fixture.bookFacade = mockFacadeService;
+      spyOn(mockFacadeService, "getMyCollectionLength").and.returnValue(
+        of(responseData)
+      );
+      fixture.ngOnInit();
+      fixture.collectionLength$.subscribe((collectionLen) => {
+        expect(collectionLen).toEqual(responseData);
+      });
     });
   });
 });

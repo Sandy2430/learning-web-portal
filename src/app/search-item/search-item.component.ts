@@ -18,13 +18,13 @@ export class SearchItemComponent implements OnInit {
 
   ngOnInit() {}
   getSearchItem() {
-    if (this.searchLibrary) {
+    // if (this.searchLibrary) {
       this.bookFacade.loadSearchString(this.searchLibrary);
       this.bookList$ = this.bookFacade.getBookList();
       this.bookFacade.loadBookList();
-    } else {
-      alert("Search box is empty");
-    }
+    // } else {
+    //   alert("Search box is empty");
+    // }
   }
 
   openFullBookView(bookInfo: BookModels.VolumeInfo) {

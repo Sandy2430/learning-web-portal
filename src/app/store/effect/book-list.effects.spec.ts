@@ -46,11 +46,11 @@ describe("BookListEffects", () => {
     appService = TestBed.get(AppService);
   });
 
-  it("effect should be created", () => {
+  test("effect should be created", () => {
     expect(effects).toBeTruthy();
   });
   describe("load book list", () => {
-    it("should be loadBooks$ effect", () => {
+    test("should be loadBooks$ effect", () => {
       const books = createSeachBookListState();
       const action = fromAction.loadBookList();
       const outcome = fromAction.loadBookListSuccess({

@@ -18,12 +18,12 @@ describe("complete-book-reference", () => {
     fixture.ngOnInit();
   });
   describe("Test: CompleteBookReferenceComponent", () => {
-    it("Complete Book Reference Component initialization", () => {
+    test("Complete Book Reference Component initialization", () => {
       expect(fixture).toBeTruthy();
     });
   });
   describe("Test: getCompleteBookInfo", () => {
-    it("Get full book details", () => {
+    test("Get full book details", () => {
       const response = {
         title: "Angular Momentum in Quantum Mechanics",
         authors: ["A. R. Edmonds"],

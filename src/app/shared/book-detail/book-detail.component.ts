@@ -20,26 +20,26 @@ export class BookDetailComponent implements OnInit {
   bookItem: VolumeInfo[] = [];
   bookItem1: VolumeInfo[] = [];
 
-  constructor(private bookFacade: BookListFacadeService) {}
+  constructor(public bookFacade: BookListFacadeService) {}
 
   ngOnInit() {}
 
-  removeItem(bookArray, bookDetails) {
-    bookArray = Object.assign([], bookArray);
-    const index = bookArray.indexOf(bookDetails);
-    bookArray.splice(index, 1);
-    this.bookFacade.addToCart(bookArray);
-    this.bookFacade.getCartCount(bookArray.length);
+  removeItem(bookList, singleBook) {
+    bookList = Object.assign([], bookList);
+    const index = bookList.indexOf(singleBook);
+    bookList.splice(index, 1);
+    this.bookFacade.addToCart(bookList);
+    this.bookFacade.getCartCount(bookList.length);
   }
 
-  addToCart(addToCart) {
+  addToCart() {
     this.bookItem = Object.assign([], this.bookItem);
-    this.bookItem.push(addToCart);
+    this.bookItem.push(this.bookDetails);
     this.bookFacade.addToCart(this.bookItem);
     this.bookFacade.getCartCount(this.bookItem.length);
   }
 
-  proceedToPurchase(bookDetails) {
-    this.bookFacade.proceedToPurchase(bookDetails);
+  proceedToPurchasePage() {
+    this.bookFacade.proceedToPurchase(this.bookDetails);
   }
 }

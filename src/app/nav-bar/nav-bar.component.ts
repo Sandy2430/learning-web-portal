@@ -13,7 +13,7 @@ export class NavBarComponent implements OnInit {
   cartLength$: Observable<number>;
   collectionLength$: Observable<number>;
   constructor(
-    private bookFacade: BookListFacadeService,
+    public bookFacade: BookListFacadeService,
   ) {}
 
   ngOnInit() {

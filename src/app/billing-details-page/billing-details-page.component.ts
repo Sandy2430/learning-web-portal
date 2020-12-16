@@ -13,6 +13,7 @@ import { BookListFacadeService } from "../store/facade/book-list-facade.service"
   styleUrls: ["./billing-details-page.component.scss"],
 })
 export class BillingDetailsPageComponent implements OnInit {
+  nameTest = "sandeep";
   modalRef: BsModalRef;
   billingForm: FormGroup;
   formValid = false;
@@ -20,9 +21,9 @@ export class BillingDetailsPageComponent implements OnInit {
   proceedToBuy: VolumeInfo;
   proceedToBuy$: Observable<VolumeInfo>;
   constructor(
-    private fb: FormBuilder,
-    private modalService: BsModalService,
-    private bookFacade: BookListFacadeService
+    public fb: FormBuilder,
+    public modalService: BsModalService,
+    public bookFacade: BookListFacadeService
   ) {}
 
   ngOnInit() {
@@ -43,14 +44,25 @@ export class BillingDetailsPageComponent implements OnInit {
       template,
       Object.assign({}, { class: "gray modal-sm" })
     );
-    const purchasedBookInfo = {
-      userName: formData.userName,
-      userEmail: formData.userEmail,
-      phoneNumber: formData.phoneNumber,
-      address: formData.address,
-      ...this.proceedToBuy,
-    };
-    this.bookFacade.loadPurchaseItem([purchasedBookInfo]);
-    this.bookFacade.loadBookPurchasedCount([purchasedBookInfo].length);
+    this.bookFacade.loadPurchaseItem([
+      {
+        userName: formData.userName,
+        userEmail: formData.userEmail,
+        phoneNumber: formData.phoneNumber,
+        address: formData.address,
+        ...this.proceedToBuy,
+      }
+    ]);
+    this.bookFacade.loadBookPurchasedCount(
+      [
+        {
+          userName: formData.userName,
+          userEmail: formData.userEmail,
+          phoneNumber: formData.phoneNumber,
+          address: formData.address,
+          ...this.proceedToBuy,
+        }
+      ].length
+    );
   }
 }

@@ -11,7 +11,7 @@ import * as bookAction from "../action";
   providedIn: "root",
 })
 export class BookListFacadeService {
-  constructor(private store: Store<BooksState>) {}
+  constructor(public store: Store<BooksState>) {}
 
   getBookList(): Observable<BookList[]> {
     return this.store.select(BookSelectors.getBooks);
@@ -57,15 +57,14 @@ export class BookListFacadeService {
   proceedToPurchase(bookDetails: VolumeInfo) {
     return this.store.dispatch(bookAction.loadBuyItem({ buy: bookDetails }));
   }
-  loadPurchaseItem(purchasedBookInfo) {
+  loadPurchaseItem(purchasedBookInfo: VolumeInfo[]) {
     return this.store.dispatch(
       bookAction.loadPurchaseItem({ purchaseList: purchasedBookInfo })
     );
   }
   loadBookPurchasedCount(count: number) {
-    return this.store.dispatch(bookAction.loadBookPurchasedCount({ purchasedCount: count }));
-  }
-  dispatch(action: Action) {
-    this.store.dispatch(action);
+    return this.store.dispatch(
+      bookAction.loadBookPurchasedCount({ purchasedCount: count })
+    );
   }
 }

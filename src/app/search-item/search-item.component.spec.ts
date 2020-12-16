@@ -8,19 +8,31 @@ describe("Test: SearchItemComponent", () => {
 
   beforeEach(() => {
     mockFacadeService = {
+      loadSearchString: jest.fn(),
       getBookList: jest.fn(),
-      getCompleteBookInfo: jest.fn(),
-      getCartItems: jest.fn(),
-      getCartLength: jest.fn(),
-      getProceedToBuyInfo: jest.fn(),
-      getPurchasedData: jest.fn(),
-      getMyCollectionLength: jest.fn(),
-      dispatch: jest.fn(),
+      loadBookList: jest.fn(),
+      getSpecificBookInfo: jest.fn(),
     };
     fixture = new SearchItemComponent(mockFacadeService);
+    fixture.ngOnInit();
   });
-  describe("Test: getBooks", () => {
-    it("it should return list of books", () => {
+  describe("Test: getSearchItem", () => {
+    test("Should load Search String", () => {
+      const mockSearch = "angular";
+      const searchSpy = jest
+        .spyOn(mockFacadeService, "loadSearchString")
+        .mockReturnValue(mockSearch);
+      fixture.getSearchItem();
+      expect(mockFacadeService.loadSearchString()).toBe(mockSearch);
+      expect(searchSpy).toHaveBeenCalled();
+    });
+    test("Should load Book List", () => {
+      const loadBookListSpy = jest.spyOn(mockFacadeService, "loadBookList");
+      fixture.getSearchItem();
+      // expect(mockFacadeService.loadBookList()).toBeDefined();
+      expect(loadBookListSpy).toHaveBeenCalled();
+    });
+    test("it should return bookList$", () => {
       const mockBookListResponse = [
         {
           kind: "books#volume",
@@ -104,12 +116,70 @@ describe("Test: SearchItemComponent", () => {
           },
         },
       ];
-      const spyGetBook = jest
-        .spyOn(mockFacadeService, "getBookList")
-        .mockReturnValue(mockBookListResponse);
-      expect(mockFacadeService.getBookList()).toBe(mockBookListResponse);
-      expect(spyGetBook).toHaveBeenCalledTimes(1);
+      spyOn(mockFacadeService, "getBookList").and.returnValue(
+        of(mockBookListResponse)
+      );
+      fixture.getSearchItem();
+      fixture.bookList$.subscribe((books) => {
+        expect(books).toEqual(mockBookListResponse);
+      });
     });
   });
- 
+  describe("Test: openFullBookView", () => {
+    test("Should called getSpecificBookInfo", () => {
+      const bookInfoMock = {
+        title: "Angular Momentum in Quantum Mechanics",
+        authors: ["A. R. Edmonds"],
+        publisher: "Princeton University Press",
+        publishedDate: "1996",
+        description:
+          "This book offers a concise introduction to the angular momentum, one of the most fundamental quantities in all of quantum mechanics. Beginning with the quantization of angular momentum, spin angular momentum, and the orbital angular momentum, the author goes on to discuss the Clebsch-Gordan coefficients for a two-fixture system. After developing the necessary mathematics, specifically spherical tensors and tensor operators, the author then investigates the 3-j, 6-j, and 9-j symbols. Throughout, the author provides practical applications to atomic, molecular, and nuclear physics. These include partial-wave expansions, the emission and absorption of particles, the proton and electron quadrupole moment, matrix element calculation in practice, and the properties of the symmetrical top molecule.",
+        industryIdentifiers: [
+          {
+            type: "ISBN_10",
+            identifier: "0691025894",
+          },
+          {
+            type: "ISBN_13",
+            identifier: "9780691025896",
+          },
+        ],
+        readingModes: {
+          text: false,
+          image: true,
+        },
+        pageCount: 146,
+        printType: "BOOK",
+        categories: ["Science"],
+        averageRating: 4,
+        ratingsCount: 1,
+        maturityRating: "NOT_MATURE",
+        allowAnonLogging: false,
+        contentVersion: "2.1.2.0.preview.1",
+        panelizationSummary: {
+          containsEpubBubbles: false,
+          containsImageBubbles: false,
+        },
+        imageLinks: {
+          smallThumbnail:
+            "http://books.google.com/books/content?id=0BSOg0oHhZ0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          thumbnail:
+            "http://books.google.com/books/content?id=0BSOg0oHhZ0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+        },
+        language: "en",
+        previewLink:
+          "http://books.google.co.in/books?id=0BSOg0oHhZ0C&pg=PA12&dq=angular&hl=&cd=1&source=gbs_api",
+        infoLink:
+          "http://books.google.co.in/books?id=0BSOg0oHhZ0C&dq=angular&hl=&source=gbs_api",
+        canonicalVolumeLink:
+          "https://books.google.com/books/about/Angular_Momentum_in_Quantum_Mechanics.html?hl=&id=0BSOg0oHhZ0C",
+      };
+      const getSpecificBookSpy = jest
+        .spyOn(mockFacadeService, "getSpecificBookInfo")
+        .mockReturnValue(bookInfoMock);
+      fixture.openFullBookView(bookInfoMock);
+      expect(mockFacadeService.getSpecificBookInfo()).toBe(bookInfoMock);
+      expect(getSpecificBookSpy).toHaveBeenCalled();
+    });
   });
+});

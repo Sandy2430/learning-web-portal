@@ -18,10 +18,10 @@ describe("CartComponent", () => {
     fixture.ngOnInit();
   });
   describe("Test: CartComponent", () => {
-    it("Cart component to be initialized", () => {
+    test("Cart component to be initialized", () => {
       expect(fixture).toBeTruthy();
     });
-    it("Update cart length", () => {
+    test("Update cart length", () => {
       const mockCartLen = 1;
       const spyUpdateCartLen = jest
         .spyOn(mockFacadeService, "getCartLength")
@@ -31,7 +31,7 @@ describe("CartComponent", () => {
     });
   });
   describe("Test: getCartItems", () => {
-    it("Get full cart item details", () => {
+    test("Get full cart item details", () => {
       const response = [
         {
           kind: "books#volume",

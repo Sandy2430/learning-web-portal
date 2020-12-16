@@ -4,7 +4,7 @@ import { BookList, VolumeInfo } from "../../models";
 
 describe("Show reducer", () => {
   describe("Unknown action", () => {
-    it("It should return default state", () => {
+    test("It should return default state", () => {
       const { initialState } = fromReducer;
       const action = { type: "unknown" };
       const state = fromReducer.reducer(initialState, action);
@@ -13,19 +13,19 @@ describe("Show reducer", () => {
     });
   });
   describe("loadBookList action", () => {
-    it("It should return default state", () => {
+    test("It should return default state", () => {
       const loadType = "[Load Book List]";
       const loadBookList = fromAction.loadBookList();
       expect(loadType).toBe(loadBookList.type);
     });
   });
   describe("getLoadSearchData action", () => {
-    it("Get search data", () => {
+    test("Get search data", () => {
       const searchData = "angular";
       const searchItem = fromAction.loadSearchData({ searchItem: searchData });
       expect(searchData).toBe(searchItem.searchItem);
     });
-    it("Get search data type", () => {
+    test("Get search data type", () => {
       const searchData = "";
       const searchType = "[Get Search String]";
       const searchItem = fromAction.loadSearchData({ searchItem: searchData });
@@ -33,7 +33,7 @@ describe("Show reducer", () => {
     });
   });
   describe("getAllSuccess action", () => {
-    it("Should update the state in an imutable way", () => {
+    test("Should update the state in an imutable way", () => {
       const { initialState } = fromReducer;
       const newState: BookList[] = [
         {
@@ -126,7 +126,7 @@ describe("Show reducer", () => {
     });
   });
   describe("loadBookListFailure", () => {
-    it("get book error", () => {
+    test("get book error", () => {
       const { initialState } = fromReducer;
       const err = new Error();
       const action = fromAction.loadBookListFailure({ bookError: err });
@@ -135,7 +135,7 @@ describe("Show reducer", () => {
     });
   });
   describe("loadSpecificBook action", () => {
-    it("Should load specific state of the book", () => {
+    test("Should load specific state of the book", () => {
       const { initialState } = fromReducer;
       const specificBookState: VolumeInfo = {
         title: "Angular Momentum in Quantum Mechanics",
@@ -192,7 +192,7 @@ describe("Show reducer", () => {
     });
   });
   describe("addBookToCart action", () => {
-    it("Should load cartItem list state", () => {
+    test("Should load cartItem list state", () => {
       const { initialState } = fromReducer;
       const addBookToCartState: VolumeInfo[] = [
         {
@@ -249,7 +249,7 @@ describe("Show reducer", () => {
       const state = fromReducer.reducer(initialState, action);
       expect(addBookToCartState).toBe(state.cartItem);
     });
-    it("Get cart length", () => {
+    test("Get cart length", () => {
       const { initialState } = fromReducer;
       const cartLen = 1;
       const action = fromAction.loadCartCount({ cartCount: cartLen });
@@ -257,7 +257,7 @@ describe("Show reducer", () => {
 
       expect(cartLen).toBe(state.cartCount);
     });
-    it("Get cart length zero", () => {
+    test("Get cart length zero", () => {
       const { initialState } = fromReducer;
       const cartLen = 0;
       const action = fromAction.loadCartCount({ cartCount: cartLen });
@@ -266,7 +266,7 @@ describe("Show reducer", () => {
     });
   });
   describe("loadBuyItem action", () => {
-    it("Get full book info which need to be purchased", () => {
+    test("Get full book info which need to be purchased", () => {
       const { initialState } = fromReducer;
       const bookPurchaseState: VolumeInfo = {
         title: "Angular Momentum in Quantum Mechanics",
@@ -321,7 +321,7 @@ describe("Show reducer", () => {
     });
   });
   describe("loadPurchaseItem action", () => {
-    it("Get book purchased itrm details", () => {
+    test("Get book purchased itrm details", () => {
       const { initialState } = fromReducer;
       const bookPurchaseInfo: VolumeInfo[] = [
         {
@@ -378,7 +378,7 @@ describe("Show reducer", () => {
       const state = fromReducer.reducer(initialState, action);
       expect(bookPurchaseInfo).toBe(state.purchasedItem);
     });
-    it("Get myCollection length", () => {
+    test("Get myCollection length", () => {
       const { initialState } = fromReducer;
       const myCollectionLen = 1;
       const action = fromAction.loadBookPurchasedCount({

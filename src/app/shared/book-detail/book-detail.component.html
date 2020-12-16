@@ -55,7 +55,7 @@
       mat-button
       color="accent"
       mat-raised-button
-      (click)="addToCart(bookDetails)"
+      (click)="addToCart()"
     >
       ADD TO CART
     </button>
@@ -64,7 +64,7 @@
       style="margin-bottom: 10px"
       color="accent"
       mat-raised-button
-      (click)="proceedToPurchase(bookDetails)"
+      (click)="proceedToPurchasePage()"
       [routerLink]="['/billing-details']"
     >
       BUY
@@ -80,7 +80,7 @@
         *ngIf="cartComponent"
         class="remove-cart-img"
         id="cartIcon"
-        (click)="removeItem(bookArray, (bookDetails))"
+        (click)="removeItem(bookArray, bookDetails)"
         >remove_shopping_cart</mat-icon
       >
     </div>
@@ -131,7 +131,7 @@
     mat-button
     color="accent"
     mat-raised-button
-    (click)="proceedToPurchase(bookDetails)"
+    (click)="proceedToPurchasePage()"
     [routerLink]="['/billing-details']"
   >
     Proceed to purchase

@@ -1,33 +1,15 @@
 import { of } from "rxjs";
-import { VolumeInfo } from "../models";
-import { MyCollectionComponent } from "./my-collection.component";
+import { AppService } from "./app.service";
 
-describe("MyCollectionComponent", () => {
-  let fixture: MyCollectionComponent;
-  let mockFacadeService: any;
-
-  beforeEach(() => {
-    mockFacadeService = {
-      getBookList: jest.fn(),
-      getCompleteBookInfo: jest.fn(),
-      getCartItems: jest.fn(),
-      getCartLength: jest.fn(),
-      getProceedToBuyInfo: jest.fn(),
-      getPurchasedData: jest.fn(),
-      getMyCollectionLength: jest.fn(),
-      dispatch: jest.fn(),
-    };
-    fixture = new MyCollectionComponent(mockFacadeService);
-  });
-  describe("Test: MyCollectionComponent", () => {
-    test("My collection Component initialization", () => {
-      expect(fixture).toBeTruthy();
-    });
-  });
-  describe("Test: getUpdatedMyCollectionList", () => {
-    test("Get my collection list", () => {
-      fixture.ngOnInit();
-      const response = {
+describe("AppService", () => {
+  let service: any;
+  const mockBooks = [
+    {
+      kind: "books#volume",
+      id: "0BSOg0oHhZ0C",
+      etag: "sWJBeRbxMK0",
+      selfLink: "https://www.googleapis.com/books/v1/volumes/0BSOg0oHhZ0C",
+      volumeInfo: {
         title: "Angular Momentum in Quantum Mechanics",
         authors: ["A. R. Edmonds"],
         publisher: "Princeton University Press",
@@ -73,18 +55,57 @@ describe("MyCollectionComponent", () => {
           "http://books.google.co.in/books?id=0BSOg0oHhZ0C&dq=angular&hl=&source=gbs_api",
         canonicalVolumeLink:
           "https://books.google.com/books/about/Angular_Momentum_in_Quantum_Mechanics.html?hl=&id=0BSOg0oHhZ0C",
-      };
-      const spygetUpdatedMyCollectionList = jest
-        .spyOn(mockFacadeService, "getBookList")
-        .mockReturnValue(response);
-      expect(mockFacadeService.getBookList()).toBe(response);
-      expect(spygetUpdatedMyCollectionList).toHaveBeenCalled();
-    });
+      },
+      saleInfo: {
+        country: "IN",
+        saleability: "NOT_FOR_SALE",
+        isEbook: false,
+      },
+      accessInfo: {
+        country: "IN",
+        viewability: "PARTIAL",
+        embeddable: true,
+        publicDomain: false,
+        textToSpeechPermission: "ALLOWED",
+        epub: {
+          isAvailable: false,
+        },
+        pdf: {
+          isAvailable: true,
+          acsTokenLink:
+            "http://books.google.co.in/books/download/Angular_Momentum_in_Quantum_Mechanics-sample-pdf.acsm?id=0BSOg0oHhZ0C&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api",
+        },
+        webReaderLink:
+          "http://play.google.com/books/reader?id=0BSOg0oHhZ0C&hl=&printsec=frontcover&source=gbs_api",
+        accessViewStatus: "SAMPLE",
+        quoteSharingAllowed: false,
+      },
+      searchInfo: {
+        textSnippet:
+          "\u003cb\u003eAngular\u003c/b\u003e Momentum of a System of Particles PRELIMINARY REMARKS . In \u003cbr\u003e\nclassical mechanics the \u003cb\u003eangular\u003c/b\u003e momentum of a system of n particles relative to a \u003cbr\u003e\npoint 0 is given by ( 2.2.1 ) 1 = įt : X : = ΣΙ . where Ii , Pi , and L , are the position \u003cbr\u003e\nvector&nbsp,...",
+      },
+    },
+  ];
+  const http = {
+    get: jest.fn(),
+  };
+  const store = {
+    select: jest.fn(),
+  };
+  const provide = (mock: any): any => mock;
+  beforeEach(() => {
+    service = new AppService(provide(http), store as any);
   });
-  describe("Test: purchasedData$", () => {
-    test(`Get purchased data`, () => {
-      const bookInfo = [
-        {
+  test("getAllbooks: should return book list", () => {
+    http.get.mockImplementationOnce(() => of(mockBooks));
+    store.select.mockImplementationOnce(() => of("angular"));
+    service.getBooks().subscribe((books) => {
+      const response = {
+        kind: "books#volume",
+        id: "0BSOg0oHhZ0C",
+        etag: "sWJBeRbxMK0",
+        selfLink: "https://www.googleapis.com/books/v1/volumes/0BSOg0oHhZ0C",
+        volumeInfo: {
           title: "Angular Momentum in Quantum Mechanics",
           authors: ["A. R. Edmonds"],
           publisher: "Princeton University Press",
@@ -131,14 +152,36 @@ describe("MyCollectionComponent", () => {
           canonicalVolumeLink:
             "https://books.google.com/books/about/Angular_Momentum_in_Quantum_Mechanics.html?hl=&id=0BSOg0oHhZ0C",
         },
-      ];
-      spyOn(mockFacadeService, "getPurchasedData").and.returnValue(
-        of(bookInfo)
-      );
-      fixture.ngOnInit();
-      fixture.purchasedData$.subscribe((books: VolumeInfo[]) => {
-        expect(books).toEqual(bookInfo);
-      });
+        saleInfo: {
+          country: "IN",
+          saleability: "NOT_FOR_SALE",
+          isEbook: false,
+        },
+        accessInfo: {
+          country: "IN",
+          viewability: "PARTIAL",
+          embeddable: true,
+          publicDomain: false,
+          textToSpeechPermission: "ALLOWED",
+          epub: {
+            isAvailable: false,
+          },
+          pdf: {
+            isAvailable: true,
+            acsTokenLink:
+              "http://books.google.co.in/books/download/Angular_Momentum_in_Quantum_Mechanics-sample-pdf.acsm?id=0BSOg0oHhZ0C&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api",
+          },
+          webReaderLink:
+            "http://play.google.com/books/reader?id=0BSOg0oHhZ0C&hl=&printsec=frontcover&source=gbs_api",
+          accessViewStatus: "SAMPLE",
+          quoteSharingAllowed: false,
+        },
+        searchInfo: {
+          textSnippet:
+            "\u003cb\u003eAngular\u003c/b\u003e Momentum of a System of Particles PRELIMINARY REMARKS . In \u003cbr\u003e\nclassical mechanics the \u003cb\u003eangular\u003c/b\u003e momentum of a system of n particles relative to a \u003cbr\u003e\npoint 0 is given by ( 2.2.1 ) 1 = įt : X : = ΣΙ . where Ii , Pi , and L , are the position \u003cbr\u003e\nvector&nbsp,...",
+        },
+      };
+      expect(books).toBe(response);
     });
   });
 });

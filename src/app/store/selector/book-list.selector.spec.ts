@@ -100,43 +100,43 @@ describe("Selectors", () => {
     purchasedItem: [],
     collectionCount: null,
   };
-  it("should select the book list", () => {
+  test("should select the book list", () => {
     const state = testState.createSeachBookListState();
     expect(fromSelector.getBooks(state)).toBe(
       state.completeBookSearchList.bookList
     );
   });
-  it("Should populate getSelectedBook", () => {
+  test("Should populate getSelectedBook", () => {
     const state = testState.createSelectedBookState();
     expect(fromSelector.getSelectedBook(state)).toBe(
       state.completeBookSearchList.selectedBook
     );
   });
-  it("Should populate getCartItem", () => {
+  test("Should populate getCartItem", () => {
     const state = testState.createGetCartItemState();
     expect(fromSelector.getCartItem(state)).toBe(
       state.completeBookSearchList.cartItem
     );
   });
-  it("Should populate getCartCount", () => {
+  test("Should populate getCartCount", () => {
     const state = testState.createGetCountState();
     expect(fromSelector.getCartCount(state)).toBe(
       state.completeBookSearchList.cartCount
     );
   });
-  it("Should populate getProceedToBuy", () => {
+  test("Should populate getProceedToBuy", () => {
     const state = testState.createGetProceedToBuyState();
     expect(fromSelector.getProceedToBuy(state)).toBe(
       state.completeBookSearchList.proceedToBuy
     );
   });
-  it("Should populate getPurchasedList", () => {
+  test("Should populate getPurchasedList", () => {
     const state = testState.createGetPurchasedListState();
     expect(fromSelector.getPurchasedList(state)).toBe(
       state.completeBookSearchList.purchasedItem
     );
   });
-  it("Should populate getCollectionCount", () => {
+  test("Should populate getCollectionCount", () => {
     const state = testState.creategetCollectionCountState();
     expect(fromSelector.getCollectionCount(state)).toBe(
       state.completeBookSearchList.collectionCount
