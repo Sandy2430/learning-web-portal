@@ -42,7 +42,6 @@ export class BillingDetailsPageComponent implements OnInit {
       template,
       Object.assign({}, { class: "gray modal-sm" })
     );
-    console.log("template", template);
     this.bookFacade.loadPurchaseItem([
       {
         userName: formData.userName,
