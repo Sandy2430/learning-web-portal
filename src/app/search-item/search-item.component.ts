@@ -3,7 +3,6 @@ import { Observable } from "rxjs";
 
 import * as BookModels from "../models";
 import { BookListFacadeService } from "../store/facade/book-list-facade.service";
-import * as BookActions from "../store/action/book-list.action";
 
 @Component({
   selector: "app-search-item",
@@ -18,13 +17,9 @@ export class SearchItemComponent implements OnInit {
 
   ngOnInit() {}
   getSearchItem() {
-    // if (this.searchLibrary) {
-      this.bookFacade.loadSearchString(this.searchLibrary);
-      this.bookList$ = this.bookFacade.getBookList();
-      this.bookFacade.loadBookList();
-    // } else {
-    //   alert("Search box is empty");
-    // }
+    this.bookFacade.loadSearchString(this.searchLibrary);
+    this.bookList$ = this.bookFacade.getBookList();
+    this.bookFacade.loadBookList();
   }
 
   openFullBookView(bookInfo: BookModels.VolumeInfo) {

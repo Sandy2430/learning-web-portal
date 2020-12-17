@@ -1,5 +1,5 @@
 import { of } from "rxjs";
-import { BookList } from "../models";
+
 import { SearchItemComponent } from "./search-item.component";
 
 describe("Test: SearchItemComponent", () => {
@@ -174,6 +174,8 @@ describe("Test: SearchItemComponent", () => {
         canonicalVolumeLink:
           "https://books.google.com/books/about/Angular_Momentum_in_Quantum_Mechanics.html?hl=&id=0BSOg0oHhZ0C",
       };
+      // const getSearchString = jest.spyOn()
+      fixture.searchLibrary = "Angular";
       const getSpecificBookSpy = jest
         .spyOn(mockFacadeService, "getSpecificBookInfo")
         .mockReturnValue(bookInfoMock);

@@ -1,9 +1,8 @@
 import { FormBuilder } from "@angular/forms";
-import { convertToParamMap } from "@angular/router";
 import { of } from "rxjs";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { BillingDetailsPageComponent } from "./billing-details-page.component";
-import { TestBed, async } from "@angular/core/testing";
+import { async } from "@angular/core/testing";
 
 describe("BillingDetailsPageComponent", () => {
   let fixture: BillingDetailsPageComponent;
@@ -29,7 +28,6 @@ describe("BillingDetailsPageComponent", () => {
       mockFacadeService,
       modalServiceMock
     );
-    // fixture.ngOnInit();
   });
   describe("Test: proceedToBuy$", () => {
     test("Get proceed to buy response", () => {

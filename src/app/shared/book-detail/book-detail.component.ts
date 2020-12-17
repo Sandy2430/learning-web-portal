@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 import { BookList, VolumeInfo } from "../../models";
-import * as BookActions from "src/app/store/action/book-list.action";
 import { BookListFacadeService } from "src/app/store/facade/book-list-facade.service";
 
 @Component({

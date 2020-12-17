@@ -9,7 +9,7 @@
     />
   </mat-form-field>
   <span style="height: 100%; width: 100%">
-    <mat-icon class="search-icon" (click)="getSearchItem()"
+    <mat-icon class="search-icon" *ngIf="searchLibrary" (click)="getSearchItem()"
       >search</mat-icon
     ></span
   >

@@ -1,4 +1,5 @@
 import { of } from "rxjs";
+
 import { NavBarComponent } from "./nav-bar.component";
 
 describe("OptionSectionComponent", () => {

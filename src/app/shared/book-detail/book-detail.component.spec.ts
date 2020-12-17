@@ -3,8 +3,6 @@ import { BookDetailComponent } from "./book-detail.component";
 describe("BookDetailComponent", () => {
   let fixture: BookDetailComponent;
   let mockFacadeService: any;
-  let mockAppServices: any;
-  let mockRouter: any;
   beforeEach(() => {
     const bookPurchaseInfo = {
       title: "Angular Momentum in Quantum Mechanics",
@@ -57,11 +55,6 @@ describe("BookDetailComponent", () => {
       addToCart: jest.fn(),
       getCartCount: jest.fn(),
       proceedToPurchase: jest.fn().mockReturnValue(bookPurchaseInfo),
-    };
-    mockAppServices = {
-      updateCartLength: jest.fn(),
-      getUpdatedCartLength: jest.fn(),
-      updateCartList: jest.fn(),
     };
     fixture = new BookDetailComponent(mockFacadeService);
     fixture.ngOnInit();

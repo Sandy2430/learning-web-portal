@@ -4,7 +4,6 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { Observable } from "rxjs";
 
 import { VolumeInfo } from "../models";
-import * as BookActions from "../store/action/book-list.action";
 import { BookListFacadeService } from "../store/facade/book-list-facade.service";
 
 @Component({
@@ -13,7 +12,6 @@ import { BookListFacadeService } from "../store/facade/book-list-facade.service"
   styleUrls: ["./billing-details-page.component.scss"],
 })
 export class BillingDetailsPageComponent implements OnInit {
-  nameTest = "sandeep";
   modalRef: BsModalRef;
   billingForm: FormGroup;
   formValid = false;
@@ -44,6 +42,7 @@ export class BillingDetailsPageComponent implements OnInit {
       template,
       Object.assign({}, { class: "gray modal-sm" })
     );
+    console.log("template", template);
     this.bookFacade.loadPurchaseItem([
       {
         userName: formData.userName,
@@ -51,7 +50,7 @@ export class BillingDetailsPageComponent implements OnInit {
         phoneNumber: formData.phoneNumber,
         address: formData.address,
         ...this.proceedToBuy,
-      }
+      },
     ]);
     this.bookFacade.loadBookPurchasedCount(
       [
@@ -61,7 +60,7 @@ export class BillingDetailsPageComponent implements OnInit {
           phoneNumber: formData.phoneNumber,
           address: formData.address,
           ...this.proceedToBuy,
-        }
+        },
       ].length
     );
   }

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Action, Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
 import { BookList, VolumeInfo } from "../../models";
